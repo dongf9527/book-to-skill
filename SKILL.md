@@ -18,6 +18,8 @@ Cross-agent notes (informational; ignored by host agents):
     adds `shell_command`. The skill needs shell (to run extract.py) and file
     read/write — each host will prompt for those on first use.
   - Argument hint: <path-to-document-folder-or-glob>... [skill-name-slug]
+  - Chinese reference translation for human readers: [docs/SKILL.zh.md](docs/SKILL.zh.md)
+    (repository fork docs; host agents execute this English original)
 -->
 
 # Book-to-Skill Converter

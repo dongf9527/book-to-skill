@@ -5,6 +5,8 @@ seo_title: "Architecture - How book-to-skill Extracts and Generates"
 
 # Architecture
 
+> 🌏 Chinese reference translation: [architecture.zh.md](architecture.zh.md) — kept in sync with this page; where they differ, this English original prevails.
+
 book-to-skill has two halves: a **deterministic extractor** (Python) and a
 **spec-driven generator** (the agent following `SKILL.md`). The extractor turns any
 document into clean text + metadata; the agent turns that into a structured skill.

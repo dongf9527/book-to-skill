@@ -73,6 +73,9 @@ upstream → https://github.com/virgiliojr94/book-to-skill.git（上游源：仅
   - `docs/architecture.zh.md` —— 上游 `architecture.md` 的中文翻译（2026-10-24，随上游同步，含译注）
   - `docs/SKILL.zh.md` —— 上游根目录 `SKILL.md` 技能规格书的中文参考译本（2026-10-24，代码块逐字节保留原文，含译注；生成脚本 scripts/splice_skill_zh.py + scripts/verify_skill_zh.py）
   - `docs/analysis/core-code-deep-dive.md` —— 核心代码深度分析：extractor 侧逐模块通读（2026-10-24，含 RFC 01 假设验证）
+  - `docs/AGENTS.zh.md` —— 上游根目录 `AGENTS.md`（编码代理执行契约）的中文参考译本（2026-10-24，对应 `560dca6`，状态值/决策标签保留英文，含译注）
+  - `docs/research/progressive-disclosure-evals.zh.md` —— 渐进式披露评估计划的中文参考译本（2026-10-24，对应 `e47a097`；快照性质，英文原文仍是唯一的"活"执行台账，含译注）
+  - 英文原文互链：`SKILL.md` 文件头注释块与 `docs/architecture.md` 标题下均已加入指向对应中文译本的链接（2026-10-24，SKILL.md 用 HTML 注释形式以保持宿主代理零干扰）
 - 后续新增记录按主题命名（如 `docs/testing/<date>-<topic>.md`），并在本清单登记。
 - 每次会话结束前，若有未推送的分析/测试产出，按规则 #1/#4 提交推送，不留"只在对话里"的结论。
 
@@ -84,3 +87,4 @@ upstream → https://github.com/virgiliojr94/book-to-skill.git（上游源：仅
 | 2026-10-24 | 新增 `docs/architecture.zh.md`（上游架构文档中文翻译，生成脚本存 scripts/gen_architecture_zh.py） |
 | 2026-10-24 | 新增 `docs/design/01-cjk-optimization-review.md`（RFC 01 技术评审记录，7 项修订落实；RFC 01 更新为修订稿 v0.1） |
 | 2026-10-24 | 新增 `docs/SKILL.zh.md`（SKILL.md 技能规格书中文参考译本：15 个代码块由脚本从原文逐字节拼入并经校验，bash 语法检查全过，上游笔误加译注不静默修正） |
+| 2026-10-24 | 新增 `docs/AGENTS.zh.md` 与 `docs/research/progressive-disclosure-evals.zh.md` 两份中文译本；`SKILL.md`/`docs/architecture.md` 英文原文加入中文版互链（SKILL.md 以文件头 HTML 注释实现，validate_skill 通过） |
