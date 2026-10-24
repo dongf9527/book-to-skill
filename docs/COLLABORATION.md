@@ -68,7 +68,8 @@ upstream → https://github.com/virgiliojr94/book-to-skill.git（上游源：仅
   - `docs/COLLABORATION.md` —— 本文档
   - `docs/ROADMAP.md` —— 三阶段二开路线图（2026-10-24）
   - `docs/testing/2026-10-24-phase1-gap-closure.md` —— 阶段一缺口补齐实测记录（SKILL.md 精读 / evals 实跑 / docling 对比）
-  - `docs/design/01-cjk-optimization.md` —— RFC 01：中文书籍优化（P1，草案待评审）
+  - `docs/design/01-cjk-optimization.md` —— RFC 01：中文书籍优化（P1，修订稿 v0.1，技术评审通过待冻结）
+  - `docs/design/01-cjk-optimization-review.md` —— RFC 01 技术评审记录（基于 deep-dive §7，修订 R1–R7 已落实）
   - `docs/architecture.zh.md` —— 上游 `architecture.md` 的中文翻译（2026-10-24，随上游同步，含译注）
   - `docs/analysis/core-code-deep-dive.md` —— 核心代码深度分析：extractor 侧逐模块通读（2026-10-24，含 RFC 01 假设验证）
 - 后续新增记录按主题命名（如 `docs/testing/<date>-<topic>.md`），并在本清单登记。
@@ -80,3 +81,4 @@ upstream → https://github.com/virgiliojr94/book-to-skill.git（上游源：仅
 |------|------|
 | 2026-10-24 | 初版：核心规则表 7 条 + remote 布局 + 凭证管理 + 浅克隆事故记录 |
 | 2026-10-24 | 新增 `docs/architecture.zh.md`（上游架构文档中文翻译，生成脚本存 scripts/gen_architecture_zh.py） |
+| 2026-10-24 | 新增 `docs/design/01-cjk-optimization-review.md`（RFC 01 技术评审记录，7 项修订落实；RFC 01 更新为修订稿 v0.1） |
