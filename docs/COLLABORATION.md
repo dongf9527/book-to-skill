@@ -68,6 +68,7 @@ upstream → https://github.com/virgiliojr94/book-to-skill.git（上游源：仅
   - `docs/COLLABORATION.md` —— 本文档
   - `docs/ROADMAP.md` —— 三阶段二开路线图（2026-10-24）
   - `docs/testing/2026-10-24-phase1-gap-closure.md` —— 阶段一缺口补齐实测记录（SKILL.md 精读 / evals 实跑 / docling 对比）
+  - `docs/design/01-cjk-optimization.md` —— RFC 01：中文书籍优化（P1，草案待评审）
 - 后续新增记录按主题命名（如 `docs/testing/<date>-<topic>.md`），并在本清单登记。
 - 每次会话结束前，若有未推送的分析/测试产出，按规则 #1/#4 提交推送，不留"只在对话里"的结论。
 
