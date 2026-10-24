@@ -1,0 +1,1277 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Turn any book, PDF or EPUB into a structured agent skill for Claude Code, GitHub Copilot CLI and Amp — frameworks and decision rules, loaded on demand.">
+      
+      
+      
+        <link rel="canonical" href="https://booktoskill.is-a.dev/analysis/core-code-deep-dive/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    <title>核心代码深度分析 — extractor 侧逐模块通读 - book-to-skill</title>
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    <meta property="og:type" content="website">
+  <meta property="og:site_name" content="book-to-skill">
+  <meta property="og:title" content="核心代码深度分析 — extractor 侧逐模块通读 - book-to-skill">
+  <meta property="og:description" content="Turn any book, PDF or EPUB into a structured agent skill for Claude Code, GitHub Copilot CLI and Amp — frameworks and decision rules, loaded on demand.">
+  <meta property="og:url" content="https://booktoskill.is-a.dev/analysis/core-code-deep-dive/">
+  <meta property="og:image" content="https://booktoskill.is-a.dev/assets/og-card.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="book-to-skill — Turn any book, PDF or EPUB into a structured agent skill for Claude Code, GitHub Copilot CLI and Amp — frameworks and decision rules, loaded on demand.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="核心代码深度分析 — extractor 侧逐模块通读 - book-to-skill">
+  <meta name="twitter:description" content="Turn any book, PDF or EPUB into a structured agent skill for Claude Code, GitHub Copilot CLI and Amp — frameworks and decision rules, loaded on demand.">
+  <meta name="twitter:image" content="https://booktoskill.is-a.dev/assets/og-card.jpg">
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#extractor" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="book-to-skill" class="md-header__button md-logo" aria-label="book-to-skill" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            book-to-skill
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              核心代码深度分析 — extractor 侧逐模块通读
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/virgiliojr94/book-to-skill" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    virgiliojr94/book-to-skill
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../guide/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Guide
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../how-it-works/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  How it works
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../usage/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Usage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../install/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Install
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../faq/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  FAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../performance/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Performance
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../skill-reference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Skill Reference
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="book-to-skill" class="md-nav__button md-logo" aria-label="book-to-skill" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    book-to-skill
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/virgiliojr94/book-to-skill" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    virgiliojr94/book-to-skill
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-it-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How it works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skill-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skill Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. 数据流总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 入口三小件
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-utilspy1695" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. utils.py（1695 行，四块）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. utils.py（1695 行，四块）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-token-l62-103" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 token 估算（L62-103）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-l106-994extractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 章节检测（L106-994）——extractor 最大子系统
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-l997-1090-l1176-1424" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 分发与多源（L997-1090, L1176-1424）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-l1426-1696" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 输出与合并（L1426-1696）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-parsers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. parsers/ 七模块
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-sanitizepy9-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. sanitize.py（9 组攻击形态 + 1 个修复）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-dependenciespy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. dependencies.py
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-pdf_inspector_integrationpyhook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. pdf_inspector_integration.py（hook 先例解剖）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-rfc-01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 对 RFC 01 各子项目的验证结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 测试锚点速查（阶段三回归防线挂点）
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="extractor">核心代码深度分析 — extractor 侧逐模块通读<a class="headerlink" href="#extractor" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>范围：<code>book_to_skill/</code> 全部 extractor 源码（约 3570 行 Python）逐模块通读。
+SKILL.md（879 行，生成器侧）已于阶段一缺口补齐时全文精读（见
+<code>docs/testing/2026-10-24-phase1-gap-closure.md</code>），本文补齐 extractor 侧。
+行号基于当前 HEAD（上游 <code>a24e62f</code>）。本文是 <code>EVALUATION.md</code>（架构级）与
+<code>DEVELOPMENT.md</code>（改动点级）之下的第三层：模块级设计与隐藏约束。</p>
+</blockquote>
+<h2 id="0">0. 数据流总览<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>extract.py(shim) → cli.main() → install_pdf_inspector_hook() → utils.main()
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  → parse_arguments / resolve_input_files / prepare_output_dir
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  → 逐源 extract_single_file()   ← 已被 hook 包裹（PDF text 快路径）
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>      → 魔数嗅探 → prepare_dependencies → 分格式解析器链
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>      → sanitize_extracted_text → estimate_tokens → detect_structure
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  → 合并写 full_text.txt + metadata.json → enrich_pdf_inspector_metadata()
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th style="text-align: right;">行数</th>
+<th>一句话职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scripts/extract.py</code></td>
+<td style="text-align: right;">34</td>
+<td>兼容入口 shim（字节码抑制 + UTF-8 + sys.path）</td>
+</tr>
+<tr>
+<td><code>cli.py</code></td>
+<td style="text-align: right;">35</td>
+<td>hook 安装 → 跑提取 → 回写元数据的三段式</td>
+</tr>
+<tr>
+<td><code>config.py</code></td>
+<td style="text-align: right;">61</td>
+<td>路径/常量/扩展名/依赖名单的唯一事实源</td>
+</tr>
+<tr>
+<td><code>utils.py</code></td>
+<td style="text-align: right;">1695</td>
+<td>章节检测 + token 估算 + 分发 + 多源合并 + main</td>
+</tr>
+<tr>
+<td><code>parsers/pdf.py</code></td>
+<td style="text-align: right;">208</td>
+<td>pdftotext/pypdf/pdfminer/docling 四链 + 页眉脚清洗</td>
+</tr>
+<tr>
+<td><code>parsers/epub.py</code></td>
+<td style="text-align: right;">202</td>
+<td>ebooklib + stdlib zipfile 双路径（spine 阅读序）</td>
+</tr>
+<tr>
+<td><code>parsers/rtf.py</code></td>
+<td style="text-align: right;">174</td>
+<td>striprtf + 自研正则兜底（目标组剥离状态机）</td>
+</tr>
+<tr>
+<td><code>parsers/docx.py</code></td>
+<td style="text-align: right;">159</td>
+<td>python-docx + stdlib XML 双路径 + XXE 预检</td>
+</tr>
+<tr>
+<td><code>parsers/html.py</code></td>
+<td style="text-align: right;">142</td>
+<td>trafilatura → bs4 → stdlib 三级 + 边界重建</td>
+</tr>
+<tr>
+<td><code>dependencies.py</code></td>
+<td style="text-align: right;">343</td>
+<td>依赖探测/安装协商/<code>--check</code> 报告</td>
+</tr>
+<tr>
+<td><code>pdf_inspector_integration.py</code></td>
+<td style="text-align: right;">282</td>
+<td>monkey-patch hook（加速器 + 信任门）</td>
+</tr>
+<tr>
+<td><code>sanitize.py</code></td>
+<td style="text-align: right;">241</td>
+<td>9 组隐形字符清洗 + 康熙部首折叠</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1">1. 入口三小件<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p><strong>extract.py</strong> 三个前置职责都写在 import 之前：<code>sys.dont_write_bytecode</code>
+防止 <code>__pycache__</code> 污染已部署的技能目录；stdout/stderr 强制 UTF-8
+reconfigure（Windows GBK/cp936 控制台下 ✓/✗ 字形会直接
+UnicodeEncodeError）；<code>sys.path.insert</code> 保证任意工作目录可导入包。
+<code>cli.py</code> 里同样的 reconfigure 再做一次——说明走 console script 入口
+（不经 shim）时也要安全。</p>
+<p><strong>cli.py</strong> 的主流程是 hook 三段式：<code>install_pdf_inspector_hook()</code>（不可用时
+no-op）→ <code>utils_main()</code> → <code>enrich_pdf_inspector_metadata()</code>。注意 hook 对
+technical 模式也会安装，但其快路径只对 text 模式生效（见 §6）。</p>
+<p><strong>config.py</strong> 藏着一段重要修复史：工作目录从固定
+<code>$TMPDIR/book_skill_work</code> 改为 <code>book_skill_work-&lt;pid&gt;</code>（L5-21）。旧方案下
+两个并发运行后者静默覆盖前者的 <code>full_text.txt</code>/<code>metadata.json</code>——轮询
+<code>metadata.json</code> 的 agent 可能在零报错情况下拿<strong>另一本书</strong>的提取结果去生成
+技能。目录是旧路径的<strong>兄弟</strong>而非子目录，让旧清理例程"找不到而不是误删在跑
+的运行"。另有 <code>or</code> 而非 <code>get()</code> 默认值的细节：环境变量设为空串会变
+<code>Path("")</code>（当前目录）并被 chmod 0700。<code>BOOK_SKILL_WORKDIR</code> 仍可整体覆盖。</p>
+<p>RFC 01 关联：<code>CJK_CHARS_PER_TOKEN = 1.5</code>（L35）是 token 校准子项目的唯一
+常数锚点；<code>default_output_dir</code> 的 per-PID 方案是 OCR 缓存目录设计要对齐的
+并发先例。</p>
+<h2 id="2-utilspy1695">2. utils.py（1695 行，四块）<a class="headerlink" href="#2-utilspy1695" title="Permanent link">&para;</a></h2>
+<h3 id="21-token-l62-103">2.1 token 估算（L62-103）<a class="headerlink" href="#21-token-l62-103" title="Permanent link">&para;</a></h3>
+<p><code>_CJK_RE</code>（L80）覆盖：康熙部首 ⼀-⿟、CJK 标点/全角、假名、谚文、兼容
+表意、BMP 统一表意、<strong>平面 2/3 整段（U+20000-3FFFF）端到端截取</strong>——注释
+明说是为了"未来扩展不会像 Extension H 那样静默漏掉"（#103 修复的 ~1000x
+低估同型问题，升一个平面重演）。康熙部首入集是因为某些电子书把正文汉字
+整体编码成部首形（⽹/⼤/⼀）。</p>
+<p><code>estimate_tokens</code>（L87）公式：无 CJK 时 <code>words / 0.75</code>；有 CJK 时
+<code>latin_words / 0.75 + cjk / 1.5</code>。docstring 明示<strong>刻意无依赖保确定性</strong>
+（同一本书永远得到同一个数）——这是 RFC 01 方案 C（默认 heuristic + 可选
+tiktoken）必须绕开的约束：可选注入不能改默认路径。</p>
+<h3 id="22-l106-994extractor">2.2 章节检测（L106-994）——extractor 最大子系统<a class="headerlink" href="#22-l106-994extractor" title="Permanent link">&para;</a></h3>
+<p><strong>判定链</strong>：<code>detect_structure</code>（L905）先走 numeric 分支（≥2 个去重章号即
+采用，ToC 条目与正文标题同号不重复计），否则 structural 分支（ATX + setext
+下划线标题，按深度分组取<strong>最浅且 ≥2 个不同标题</strong>的层），两级都空则 Part
+兜底；最终取 <code>max(numeric, structural)</code>——单个游离罗马数字（书中复现的
+论文示例）不足以压制 structural 计数。<code>chapters_method</code> 字段随结果上报：
+注释原话是"这是全项目唯一曾静默做出的决策"。</p>
+<p><strong>多语言正则的分层策略</strong>（这是上游最容易低估的资产）：</p>
+<ul>
+<li><strong>组合式</strong>：中文 <code>第N章回卷节篇讲</code>（L185，中文数字十百千组合 1-999，
+  L691 <code>_cn_numeral_to_int</code>）；波斯语词序数 1-34 最长前缀匹配
+  （<code>چهاردهم</code> 须赢过 <code>چهارم</code>，L420）；</li>
+<li><strong>位置式</strong>：泰/印地/孟加拉/奥里亚/泰米尔/僧伽罗/泰卢固/卡纳达/
+  马拉雅拉姆/古吉拉特/旁遮普——数字块各自重映射（<code>str.maketrans</code>），
+  词形要求后随数字防止屈折形式误报；</li>
+<li><strong>直读式</strong>：俄/希腊（全大写去变音符 <code>κεφ[άα]λαιο</code>）、韩
+  <code>제N장</code> + <code>의N</code> 插入章（法条惯例）+ 韩语专用尾部守卫（无大小写可依）。</li>
+</ul>
+<p><strong>防误报五件套</strong>（每件都有 issue 编号和语料校准记录）：</p>
+<ol>
+<li><code>_HEADING_TAIL</code>（L120）：编号后须行尾/标点/<strong>大写词</strong>——"Chapter 6
+   explores…" 是散文；</li>
+<li><code>_PERIOD_TAIL</code> + <code>_is_prose_period_tail</code>（L131/L737）：句点尾在上下文
+   中判断——行独立则保标题，段落续行须像标题（≤8 词）；阈值用 Rust Book
+   112 文件实测校准（#237）；</li>
+<li><code>_closed_fence_line_numbers</code>（L526）：<strong>只认闭合围栏</strong>——未闭合围栏当
+   普通文本，"数行代码当散文"远比"丢掉半本书的结构"便宜（CommonMark
+   闭合规则：同字符、更长、无 info string）；</li>
+<li>纯数字标题 <code>^([1-9]\d{0,2})\s{2,}(\S)</code>（L784）要求 ≥2 空格防 "1. Item"
+   列表项，且首字符非 diff 标记（<code>1  + use crate…</code>）；</li>
+<li><code>_is_non_chapter_section</code>（L501）：前后佐料整题白名单，但只限惯例
+   结构——"Indexing Strategies"“Glossary of Terms" 必须仍是章节。</li>
+</ol>
+<p><strong>数字标题的结构性判据</strong>（L573）刻意不看数字本身：不要求从 1 连续——提取
+丢一个标题、章列表从 0 起、多源语料重编号都会断链；改用<strong>中位正文字数
+≥200</strong>（实测中位：教程步 ~20 / 文档节 ~500 / 论文节 ~2000 / 书章 ~5000，
+L565-568 的注释是这个项目"用数据定阈值"文化的最佳标本）。</p>
+<p><strong>structural 分支细节</strong>：setext 下划线只在紧贴非空标题行且<strong>不短于标题</strong>
+时成立（主题分隔线/表格边框/<code>---</code> 不误判）；ATX 的 <code>=</code> 前缀（AsciiDoc）
+靠必需空格与 RST 下划线区分；围栏内标题跳过；数字引导的标题延后按深度
+单独裁决。</p>
+<p><strong>与 sanitize 的顺序耦合</strong>：<code>sanitize_extracted_text</code> 先剥 U+200C，因此
+波斯序数表必须同时注册去 ZWNJ 拼写（L408-414），僧伽罗梵语借词
+（连字内嵌 ZWNJ）则永远匹配不到——这是跨模块时序约束的活例子。</p>
+<h3 id="23-l997-1090-l1176-1424">2.3 分发与多源（L997-1090, L1176-1424）<a class="headerlink" href="#23-l997-1090-l1176-1424" title="Permanent link">&para;</a></h3>
+<p><code>extract_single_file</code> 的错误纪律写在 L1188-1192 注释里：<strong>本函数一切失败
+必须抛 ExtractionError</strong>——批量循环只捕这一种，其他异常会中止整批运行
+（包括本可成功的源）。魔数嗅探兜底（%PDF → pdf；PK + mimetype → epub；
+PK + word/document.xml → docx）。EPUB 链 = ebooklib → stdlib zipfile，
+图片 &gt;5 张才提示（散文书封面属正常）；PDF 链 = <code>looks_image_only</code> 预检
+（扫描件直接报错并给出 ocrmypdf 建议，L1272-1278——<strong>RFC 01 OCR hook 的
+原定插入点</strong>）→ technical 走 docling（失败/空即降级 text 链，
+<code>fallback_reason</code> 三态）→ pdftotext → pypdf → pdfminer。</p>
+<p><code>reuse_is_safe</code>（L1101）：中断恢复的安全判据 = workdir 在 + 模式同 +
+来源按<strong>文件名 + sha256</strong> 1:1 匹配；size 刻意不比（metadata 只存两位小数，
+指纹完全覆盖它）；乱序与改内容给出不同的拒绝原因。注意判据<strong>不含提取器
+版本</strong>——docling 升级后 resume 会复用旧提取结果。</p>
+<h3 id="24-l1426-1696">2.4 输出与合并（L1426-1696）<a class="headerlink" href="#24-l1426-1696" title="Permanent link">&para;</a></h3>
+<p><code>prepare_output_dir</code>（L1426）：共享 tmp 双防——拒绝 symlink（可预测路径
+预埋）+ 拒绝他属主目录 + chmod 0700。<code>main</code> 里三处容易踩的坑都已被上游
+修掉并留注释：写文件 <code>newline="\n"</code>（Windows 默认翻译会把 CRLF 变
+CRCRLF，读回时破坏 setext 标题）；合并后的结构检测用<strong>无 banner 的原文</strong>
+重新跑（<code>SOURCE</code> 分隔条里的 <code>====</code> 会变幻影 setext 标题，且结果依赖
+source 路径长度）；<code>has_toc</code> 按源 OR 合并（30k 窗口只看第一个源，
+否则答案随输入顺序翻转）。多源 structural 计数取各源之和（#272：重扫
+合并语料会选中 H1 书名）。元数据自描述 workdir（消费者可精确清理），
+<code>ensure_ascii=False</code> 必须配显式 UTF-8 编码（cp1252/LC_ALL=C 下全书提取完
+才崩）。长文只检出 1 节时打警告——"检测失败远比一章节的书常见"。</p>
+<p>隐藏约束：per-source 结果字典携带 <code>text</code> 全文直到进程结束，<code>main</code> 又拼
+<code>consolidated_text</code>——大书峰值内存约 <strong>×2</strong>。RFC 01 若加 OCR 中间产物
+需注意此峰值。</p>
+<h2 id="3-parsers">3. parsers/ 七模块<a class="headerlink" href="#3-parsers" title="Permanent link">&para;</a></h2>
+<p><strong>text.py</strong>：BOM 表按长度降序（UTF-32 LE <code>ff fe 00 00</code> 以 UTF-16 LE
+<code>ff fe</code> 开头，顺序错则误判）；BOM 声明解码失败<strong>拒绝</strong>降级 cp1252/latin-1
+——"BOM 是显式编码声明，静默接受 mojibake 比失败糟"；无 BOM 才走
+utf-8 → cp1252 → latin-1 链。</p>
+<p><strong>pdf.py</strong>：<code>clean_pdftotext</code> 的页眉页脚判定 = 每页首/末非空行 Counter，
+<strong>&gt;半数页</strong>才算样板；单行页只投一票（分部页在 4 页中出 2 次若投两票会被
+误删）；样板只在<strong>页缘</strong>删（运行页眉重复节标题时，曾把正文真标题一并删掉）。
+罗马页码正则用<strong>规范形状</strong> <code>(?:xc|xl|l?x{0,3})(?:ix|iv|v?i{0,3})</code> 而非
+字母集——旧写法把 "MIX"/"CIVIL"/"MILD" 当页码删掉（删真文本比留杂数字
+更糟）。连字符换行合并 <code>(\w)-\n(\w)</code> 的已知局限（"well-known" →
+"wellknown"）注释明示"咬到再上词典"。<code>looks_image_only</code> 前 5 页无文本即
+扫描件签名，无 pdftotext 时 best-effort 返回 False。
+<strong><code>extract_with_docling</code> 设 <code>do_ocr = False</code></strong>（L156）——docling 路径本身
+不做 OCR，且异常不内捕（交给上层降级）。RFC 01 两条 OCR 路线（外层 hook
+前置 ocrmypdf/rapidocr vs. 开 docling 自带 OCR pipeline）的对比点即在此。</p>
+<p><strong>epub.py</strong>：ebooklib 路径按 <strong>spine 阅读序</strong>重排并按 <code>id()</code> 去重，剩余
+文档兜底追加；stdlib 路径走 container.xml → OPF（属性顺序无关的标签级
+正则，兼容显式 <code>opf:</code> 前缀）→ manifest id→href → spine idref 真阅读序 →
+剩余 .html/.xhtml 安全网；IRI 解链顺序 = <code>html.unescape → urlsplit →
+unquote → normpath</code>（镜像真 XML 解析器的实体已解码状态）。</p>
+<p><strong>docx.py</strong>：双路径行序<strong>实质不同</strong>——python-docx 把所有表格追加在末尾，
+stdlib 路径按文档序（<code>emit_block</code> 递归，<code>w:sdt</code> 内容控件下钻、<code>w:p</code>/
+<code>w:tbl</code> 不下钻防单元格重计）；安全校验内聚在每个叶子 parser（"恰好一次"
+无论走哪条路），且 <code>except ExtractionError: raise</code> 显式置于宽 except 之前
+——否则 XXE 拒绝会被 <code>[warn] + None</code> 吞掉变成静默降级。校验本身是 5 种
+编码逐个 decode 后字符串扫描 <code>&lt;!DOCTYPE/&lt;!ENTITY</code>。</p>
+<p><strong>rtf.py</strong>：<code>_strip_destination_groups</code> 是个括号深度状态机——只剥控制字
+会把字体名/生成器/作者元数据<strong>留在正文里</strong>，必须整组删；<code>\*</code> ignorable
+组按 RTF 规范跳过（顺带覆盖厂商扩展）；<strong>未闭合目标组 → 返回原始文本</strong>：
+"截断整本书是比泄漏元数据残留更大的恶"。转义字面量暂存
+（<code>\\→\x01</code> 等）必须在目标组扫描<strong>之后</strong>、控制字处理<strong>之前</strong>——时序
+注释写得很清楚。</p>
+<p><strong>html.py</strong>：块级标签<strong>开与闭都出边界</strong>——没有闭边界
+<code>&lt;h2&gt;Chapter 1&lt;/h2&gt;Intro</code> 会连成 "Chapter 1Intro"，而
+<code>_EXPLICIT_CHAPTER</code> 需要数字后词边界，"1I" 没有——<strong>HTML 提取质量直接
+决定章节检测成败</strong>；表格单元格用 tab 连接（行保持单行，表格型目录可被
+当作单行标题解析）；<code>_pending</code> 延迟最强边界（<code>\n</code> 不被 <code>&lt;td&gt;</code> 降级成
+<code>\t</code>）；<code>convert_charrefs=True</code> 已解码实体，<strong>不再二次 unescape</strong>（否则
+<code>&amp;amp;amp;</code> 折叠错）。trafilatura 失败/不自信（返回 None/空白而非异常）
+也降级而非传播。</p>
+<p><strong>calibre.py</strong>：每次转换用<strong>独立 TemporaryDirectory</strong>——共享 workdir 下
+可预测文件名会被上次运行的残留满足（"转换成功但没写"会返回<strong>别的书</strong>的
+文本并记到本书名下）；pid 复用都不够，必须 fresh 目录；目录创建失败
+<strong>raise 而非 return None</strong>——None 与"成功但空"不可区分，正是该函数要
+拒绝的静默失败形态。</p>
+<h2 id="4-sanitizepy9-1">4. sanitize.py（9 组攻击形态 + 1 个修复）<a class="headerlink" href="#4-sanitizepy9-1" title="Permanent link">&para;</a></h2>
+<p>按攻击形状分组（可审查性优先）：零宽间隔符（含 U+2061-2064 不可见数学
+算子、软连字符、蒙文元音分隔符）；<strong>双向控制（Trojan Source
+CVE-2021-42574）</strong>——注释点透本质："模型读到的字符序列不变，<strong>人类看到的
+顺序</strong>变"；隐形字母（韩文填充器——是字母不是空白，活过空白归一化，可给
+隐藏文本垫宽）；标签块 U+E0000-E007F（整段 ASCII 载荷走私）；<strong>变体选择
+符</strong>（每个携带 256 值之一，基字符后一串选择符 = 不可见任意载荷；是组合
+记号所以 Cf 类别过滤抓不到）；弃用格式控制/行间注记/音乐格式控制。</p>
+<p><code>is_invisible_codepoint</code> 单独暴露的意图写在 L210-213：给生成技能扫描器
+用——"两层集合漂移时，extractor 放过扫描器报警的字符，或更糟，两层都不
+覆盖"。<strong>这是"单点复用防漂移"原则的另一实例</strong>（与章节正则共享同理）。</p>
+<p>康熙部首折叠（L158-204）：NFKC <strong>派生</strong>映射表（与 Unicode 零同步成本）；
+范围刻意限定在 U+2F00-2FDF——全文本 NFKC 会改写全角形式/连字/圈数字/
+兼容表意（合法正文，<code>test_normalization_is_scoped_to_kangxi_radicals</code>
+钉死）；补充区 U+2E80-2EF3 刻意不折（无兼容分解，且 U+2EEB 是普通汉字
+⻫≠二）。折叠是<strong>可读性修复而非安全清除</strong>，不计入移除总数。RFC 01 中文
+优化方向里"字体映射损坏"问题的兜底层已在此。</p>
+<h2 id="5-dependenciespy">5. dependencies.py<a class="headerlink" href="#5-dependenciespy" title="Permanent link">&para;</a></h2>
+<p>8 个依赖组的<strong>满意语义</strong>分四级：<code>any_tool_suffices</code>（模块或系统工具任一）、
+<code>any_of_modules</code>（至少一个模块）、默认全量、系统工具必备（Calibre 是唯一
+硬依赖且仅限 MOBI/AZW）。<code>isolated_install_hint</code>（L84）处理 pipx 隔离
+安装——"<code>✗ python: docling</code> 正确但没用"，给出 venv Python 路径且<strong>永不谎称
+可用</strong>（"PATH 上的二进制不使 import 成立"）。ask 模式只在
+<code>sys.stdin.isatty()</code> 时提问；<code>--check</code> 恒 exit 0（缺可选依赖不是错误）。
+<code>prepare_dependencies</code>（L215）是格式 → 依赖协商的必经点——新格式接线的
+第三站（<code>config.py</code> 注册 → 这里加组 → <code>extract_single_file</code> 加分支）。</p>
+<h2 id="6-pdf_inspector_integrationpyhook">6. pdf_inspector_integration.py（hook 先例解剖）<a class="headerlink" href="#6-pdf_inspector_integrationpyhook" title="Permanent link">&para;</a></h2>
+<p>RFC 01 OCR 子项目声称"照 pdf_inspector hook 先例"，本文把该先例拆开验证：</p>
+<ul>
+<li><strong>安装</strong>（L193）：monkey-patch 包裹 <code>utils.extract_single_file</code>，幂等
+  属性守卫（<code>_book_to_skill_pdf_inspector_hook</code>）防重复包裹；</li>
+<li><strong>快路径条件</strong>（L218）：仅 text 模式 + inspector 返回非空 markdown +
+  信任门全过（<code>text_based</code> + confidence ≥ 0.90 + 无待 OCR 页 + 无编码
+  问题）才走 native Markdown；technical 模式<strong>原样通过</strong>；</li>
+<li><strong>信任门哲学</strong>（L47-55）：inspect 结果"刻意保守"——不信任时<strong>只回
+  元数据</strong>，既有 fallback 链保持权威；降级原因人类可读（<code>_fallback_reason</code>）；</li>
+<li><strong>结果复刻</strong>（L118）：<code>_result_from_inspector</code> 完整重建 per-source
+  字典（sanitize → detect_structure → estimate_tokens → sha256）；sha256
+  <strong>惰性直 import</strong> 而不走注入的 <code>utils_module</code>——现有测试传
+  SimpleNamespace 当 utils，哈希必须是文件本身的纯函数（测试 seams 的
+  设计意图）；</li>
+<li><strong>元数据回写</strong>（L236）：按 resolve() 后的 source_file 匹配，tmp +
+  replace 原子替换，单源时提升到顶层；</li>
+<li><code>_reset_state_for_tests</code> 是显式测试钩子。</li>
+</ul>
+<p><strong>结论：OCR hook 完全可以套这个形状</strong>——wrap <code>extract_single_file</code>，在
+<code>looks_image_only</code> 判定前插入"OCR 预处理"分支（或直接替换为 OCR 后的
+文本层），信任门 + fallback_reason + 元数据回写三件套照抄。另一条路线
+（开 docling 自带 OCR，<code>do_ocr=True</code>）改动更小但重（模型管线）且失去
+"每页原因"可观测性。RFC 01 推荐前者，本文深读支持该判断。</p>
+<h2 id="7-rfc-01">7. 对 RFC 01 各子项目的验证结论<a class="headerlink" href="#7-rfc-01" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>RFC 假设</th>
+<th>深读验证</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OCR 走 hook 模式不侵入主链</td>
+<td>§6 全套先例（幂等守卫/信任门/原子回写/测试钩子）已验证</td>
+<td><strong>成立</strong>，且插入点建议从"looks_image_only 之后"上移为"wrap 层判定之前"（省一次注定失败的探测）；注意 <code>extract_with_docling do_ocr=False</code> 意味着 technical 模式同样吃不到 OCR，hook 两条模式都要考虑</td>
+</tr>
+<tr>
+<td>token 校准 1.5→1.2 + 可选 tiktoken</td>
+<td>常数单点（config L35）；estimate_tokens 刻意确定性</td>
+<td><strong>成立</strong>，但 tiktoken 必须走可选注入（默认路径不可加依赖）；metadata 与合并全文各估一次，两处共用同一函数无漂移风险</td>
+</tr>
+<tr>
+<td>docling 代码块换行重建</td>
+<td>docling 导出无坐标（<code>export_to_markdown()</code> 无参），重建只能文本启发式；插入点在 docling 成功分支与 sanitize 之间</td>
+<td><strong>成立</strong>，双阈值设计必要；另注意重建须在 sanitize 前完成（否则零宽探针被剥）</td>
+</tr>
+<tr>
+<td>不碰中文章节检测</td>
+<td>L153-186 + L691 覆盖第N章回卷节篇讲/md 前缀/康熙数字/全角/中文数字 1-999</td>
+<td><strong>正确</strong>，中文章节检测已是全项目覆盖最全的语言分支</td>
+</tr>
+<tr>
+<td>回归防线用 evals replay</td>
+<td>reuse_is_safe/hook 的注入式测试面（SimpleNamespace 先例）+ Rust Book 语料校准先例</td>
+<td><strong>成立</strong>，fixture 习惯与测试 seams 均有现成模板</td>
+</tr>
+</tbody>
+</table>
+<p>深读新登记的两点（RFC 01 评审时补充考虑）：① per-source 结果携带全文 +
+合并文本 = 大书内存 ×2，OCR 中间产物注意峰值；② <code>reuse_is_safe</code> 不含
+提取器版本指纹——若 OCR 引入缓存层，须自行把 OCR 引擎版本纳入指纹，
+这是现成判据的已知盲区而非缺陷。</p>
+<h2 id="8">8. 测试锚点速查（阶段三回归防线挂点）<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<ul>
+<li>章节检测：语言矩阵 fixture（Rust Book 校准先例，#237/#91/#272/#274 均
+  有测试背书）；</li>
+<li>hook/依赖：<code>SimpleNamespace</code> 注入 + <code>_reset_state_for_tests</code>；</li>
+<li>恢复：<code>reuse_is_safe</code> 的 Counter 乱序/指纹缺失分支；</li>
+<li>清洗：<code>test_normalization_is_scoped_to_kangxi_radicals</code> 一类"范围钉死"
+  测试范式；</li>
+<li>端到端：<code>evals/replay.py</code> 轨迹打分（缺口补齐记录已实测）。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.instant", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

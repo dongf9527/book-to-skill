@@ -1,0 +1,1767 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Turn any book, PDF or EPUB into a structured agent skill for Claude Code, GitHub Copilot CLI and Amp — frameworks and decision rules, loaded on demand.">
+      
+      
+      
+        <link rel="canonical" href="https://booktoskill.is-a.dev/SKILL.zh/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    <title>SKILL.md 中文参考译本 —— book-to-skill 技能规格书 - book-to-skill</title>
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    <meta property="og:type" content="website">
+  <meta property="og:site_name" content="book-to-skill">
+  <meta property="og:title" content="SKILL.md 中文参考译本 —— book-to-skill 技能规格书 - book-to-skill">
+  <meta property="og:description" content="Turn any book, PDF or EPUB into a structured agent skill for Claude Code, GitHub Copilot CLI and Amp — frameworks and decision rules, loaded on demand.">
+  <meta property="og:url" content="https://booktoskill.is-a.dev/SKILL.zh/">
+  <meta property="og:image" content="https://booktoskill.is-a.dev/assets/og-card.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="book-to-skill — Turn any book, PDF or EPUB into a structured agent skill for Claude Code, GitHub Copilot CLI and Amp — frameworks and decision rules, loaded on demand.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SKILL.md 中文参考译本 —— book-to-skill 技能规格书 - book-to-skill">
+  <meta name="twitter:description" content="Turn any book, PDF or EPUB into a structured agent skill for Claude Code, GitHub Copilot CLI and Amp — frameworks and decision rules, loaded on demand.">
+  <meta name="twitter:image" content="https://booktoskill.is-a.dev/assets/og-card.jpg">
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#skillmd-book-to-skill" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="book-to-skill" class="md-header__button md-logo" aria-label="book-to-skill" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            book-to-skill
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SKILL.md 中文参考译本 —— book-to-skill 技能规格书
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/virgiliojr94/book-to-skill" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    virgiliojr94/book-to-skill
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../guide/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Guide
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../how-it-works/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  How it works
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../usage/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Usage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../install/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Install
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../faq/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  FAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../architecture/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../performance/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Performance
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../skill-reference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Skill Reference
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="book-to-skill" class="md-nav__button md-logo" aria-label="book-to-skill" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    book-to-skill
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/virgiliojr94/book-to-skill" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    virgiliojr94/book-to-skill
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-it-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How it works
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../skill-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skill Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#frontmatter-l14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文件头 frontmatter（原文 L1–4）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#l621-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        跨主机说明（原文 L6–21 的 HTML 注释；信息性内容，宿主代理会忽略）
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="skillmd-book-to-skill">SKILL.md 中文参考译本 —— book-to-skill 技能规格书<a class="headerlink" href="#skillmd-book-to-skill" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>译本性质：本文件是仓库根目录 <code>SKILL.md</code>（上游 <code>a24e62f</code>，879 行）的<strong>中文参考译本</strong>，供人类读者理解规格使用。
+<strong>宿主代理生成技能时实际执行的是英文原文</strong>——本译本不进入任何生成的技能包；如有出入，以英文原文为准。
+翻译约定：① 可执行代码块（bash）与生成模板块保留英文原文（由脚本按行号从原文逐字节拼入，见文末译注⑤），块后附中文结构说明；② 正文叙述全部翻译；③ 路径、命令、环境变量、占位符（如 <code>&lt;skill_name&gt;</code>）保持原样；④ 小节标题采用「中文（英文原词）」格式；⑤ 上游笔误如实保留并加译注，不静默修正。
+关联：阶段一精读记录 <a href="../testing/2026-10-24-phase1-gap-closure/">testing/2026-10-24-phase1-gap-closure.md</a>（SKILL.md Step 3–11 十要点）· <a href="../architecture.zh/">architecture.zh.md</a>（整体架构）</p>
+</blockquote>
+<hr />
+<h2 id="frontmatter-l14">文件头 frontmatter（原文 L1–4）<a class="headerlink" href="#frontmatter-l14" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">book-to-skill</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">"将书籍与文档（PDF、EPUB、DOCX、HTML、Markdown、纯文本、RTF，MOBI/AZW</span><span class="nv"> </span><span class="s">需借助</span><span class="nv"> </span><span class="s">Calibre）转换为结构化的</span><span class="nv"> </span><span class="s">agent</span><span class="nv"> </span><span class="s">技能，提取其中的框架、思维模型、原则、技巧与反模式。当用户想通过</span><span class="nv"> </span><span class="s">GitHub</span><span class="nv"> </span><span class="s">Copilot</span><span class="nv"> </span><span class="s">CLI、Amp、Claude</span><span class="nv"> </span><span class="s">Code、Hermes</span><span class="nv"> </span><span class="s">Agent、OpenCode</span><span class="nv"> </span><span class="s">或</span><span class="nv"> </span><span class="s">OpenClaw</span><span class="nv"> </span><span class="s">研读一份文档，想在工作中应用某位作者的框架，或想从一份文件构建可复用的知识库时，使用本技能。"</span>
+</code></pre></div>
+<blockquote>
+<p><strong>译注①</strong>：<code>description</code> 是宿主代理做技能发现/匹配的功能性元数据。实际技能包中建议保留英文原文（技能检索通常以英文关键词触发），此处中文仅为便于理解，原文见根目录 <code>SKILL.md</code> L3。</p>
+</blockquote>
+<h2 id="l621-html">跨主机说明（原文 L6–21 的 HTML 注释；信息性内容，宿主代理会忽略）<a class="headerlink" href="#l621-html" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>兼容的技能根目录</strong>：GitHub Copilot CLI（<code>~/.copilot/skills</code>、<code>~/.agents/skills</code>、<code>.github/skills</code>、<code>.claude/skills</code>、<code>.agents/skills</code>）、Amp（<code>.agents/skills</code>、<code>~/.config/agents/skills</code>、<code>~/.config/amp/skills</code>）、Claude Code（<code>~/.claude/skills</code>）、Hermes Agent（<code>$HERMES_HOME/skills</code>、<code>.hermes/skills</code>、<code>.agents/skills</code>）、OpenClaw（<code>${OPENCLAW_STATE_DIR:-~/.openclaw}/skills</code>、<code>.agents/skills</code>、<code>skills/</code>；<code>~/.agents/skills</code> 仅默认状态可用）、OpenCode（<code>~/.config/opencode/skills</code>、<code>~/.claude/skills</code>、<code>.opencode/skills</code>、<code>~/.agents/skills</code>、<code>.agents/skills</code>）。</li>
+<li><strong>刻意省略 <code>allowed-tools</code> 以保持 agent 中立</strong>：Copilot CLI 用 <code>shell</code>/MCP 服务器名，Claude 用 <code>Bash</code>/<code>Read</code>/<code>Write</code>/<code>Glob</code>/<code>Grep</code>，Amp 额外有 <code>shell_command</code>。本技能需要 shell（运行 extract.py）与文件读写——各宿主首次使用时会就此请求授权。</li>
+<li><strong>参数提示</strong>：<code>&lt;path-to-document-folder-or-glob&gt;... [skill-name-slug]</code></li>
+</ul>
+<h1 id="book-to-skill">Book-to-Skill 转换器<a class="headerlink" href="#book-to-skill" title="Permanent link">&para;</a></h1>
+<p>把书面知识转化为可落地的 agent 技能——提取的是结构，不是摘要。</p>
+<h2 id="philosophy">设计哲学（Philosophy）<a class="headerlink" href="#philosophy" title="Permanent link">&para;</a></h2>
+<p>书籍中沉淀着专家经验：框架、原则与技巧，往往经年累月才打磨成形。本技能把这些知识提取成 GitHub Copilot CLI、Amp、Claude Code、Hermes Agent、OpenCode、OpenClaw 或其他兼容 agent 可以反复调用的形式。</p>
+<p><strong>提取结构，而非摘要。</strong> 技能不是读书报告。它是一套工具箱：</p>
+<ul>
+<li>具名框架（有明确应用场景的思维模型）</li>
+<li>可行动的原则（指导决策的规则）</li>
+<li>技巧（分步方法）</li>
+<li>反模式（要避开什么、为什么）</li>
+<li>作者语气校准（作者如何思考与表达）</li>
+</ul>
+<p><strong>保留作者的精确表述。</strong> 框架的命名往往有特定理由。"The 5 Whys（五问法）"不能替换成"多问几次为什么"。要捕获原文的准确提法。</p>
+<p><strong>分层控制深度。</strong> 简单的书 → 简单的技能。含 10+ 框架的复杂书 → 带参考文件与按需章节的技能。</p>
+<hr />
+<h2 id="modes-of-operation">运行模式（Modes of Operation）<a class="headerlink" href="#modes-of-operation" title="Permanent link">&para;</a></h2>
+<p>四条路径。按用户的请求路由：</p>
+<h3 id="1">1. 完整转换（默认）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p><strong>触发</strong>：用户给出一或多个文档/目录/glob 路径，无特殊指示
+<strong>动作</strong>：执行下列全部步骤（Step 0–9）
+<strong>输出</strong>：完整技能，含 SKILL.md、chapters/、glossary、patterns、cheatsheet</p>
+<h3 id="2-analyze-only">2. 仅分析（Analyze Only）<a class="headerlink" href="#2-analyze-only" title="Permanent link">&para;</a></h3>
+<p><strong>触发</strong>：用户说"分析一下""先只提取"，或"生成前我先审一遍"
+<strong>动作</strong>：执行 Step 0–3，然后产出结构化提取报告（找到的框架、原则、技巧）。到此停止——<strong>不要</strong>生成技能文件。
+<strong>输出</strong>：供用户审阅的分析报告</p>
+<h3 id="3-generate-from-prior-analysis">3. 从既有分析生成（Generate from Prior Analysis）<a class="headerlink" href="#3-generate-from-prior-analysis" title="Permanent link">&para;</a></h3>
+<p><strong>触发</strong>：用户已有分析笔记，或之前跑过"仅分析"
+<strong>动作</strong>：跳过 Step 0–3，以所提供的分析为输入，执行 Step 4–9
+<strong>输出</strong>：基于该分析生成的技能文件</p>
+<h3 id="4-update-fold-in">4. 更新/并入（Update / Fold-in，针对既有技能）<a class="headerlink" href="#4-update-fold-in" title="Permanent link">&para;</a></h3>
+<p><strong>触发</strong>：用户提供一或多个新源路径，并表示要更新既有技能（指向既有技能文件夹、给出 <code>SKILLS_HOME</code> 中已存在的技能 slug，或明确要求更新）
+<strong>动作</strong>：执行 Step 0（范围外检查）、Step 1（校验输入）、Step 1.5（识别内容类型）与 Step 2（提取新文件），然后跳到 Step 5（定位/探测既有技能路径），按<strong>更新/并入工作流</strong>把新内容合并进既有技能文件。
+<strong>输出</strong>：更新后的既有技能，含新增/修订的章节摘要与合并后的索引/词汇表。</p>
+<hr />
+<h2 id="skill-locations">技能位置（Skill Locations）<a class="headerlink" href="#skill-locations" title="Permanent link">&para;</a></h2>
+<p>本转换器可在多种技能系统中运行。查找本转换器的辅助脚本、或写入生成的书籍技能时，按以下优先顺序选择位置：</p>
+<ol>
+<li>GitHub Copilot CLI 个人技能：<code>~/.copilot/skills/</code></li>
+<li>跨 agent 个人技能（Copilot、Amp、Codex；默认状态下的 OpenClaw）：<code>~/.agents/skills/</code></li>
+<li>Claude Code 个人技能：<code>~/.claude/skills/</code></li>
+<li>项目级 Copilot 技能：<code>.github/skills/</code></li>
+<li>项目级 Claude 技能：<code>.claude/skills/</code></li>
+<li>项目级 Amp / Copilot / OpenClaw 技能：<code>.agents/skills/</code></li>
+<li>Amp 全局技能：<code>~/.config/agents/skills/</code></li>
+<li>Amp 旧版全局技能：<code>~/.config/amp/skills/</code></li>
+<li>Hermes Agent 个人技能：<code>$HERMES_HOME/skills/</code>（默认 <code>~/.hermes/skills/</code>）</li>
+<li>Hermes Agent 项目技能：<code>.hermes/skills/</code> 或 <code>.agents/skills/</code></li>
+<li>OpenClaw 个人技能：<code>${OPENCLAW_STATE_DIR:-~/.openclaw}/skills/</code>（活跃状态；<code>~/.agents/skills/</code> 仅与默认状态共享）</li>
+<li>OpenClaw 项目技能：<code>.agents/skills/</code> 或 <code>skills/</code></li>
+<li>OpenCode 个人技能：<code>~/.config/opencode/skills/</code> 或 <code>~/.agents/skills/</code></li>
+<li>OpenCode 项目技能：<code>.opencode/skills/</code> 或 <code>.agents/skills/</code></li>
+</ol>
+<blockquote>
+<p><strong>译注②</strong>：本列表沿用上游原始编号——原文在此出现两个"11."与两个"12."（OpenClaw 两条与 OpenCode 两条），实际共 14 项，疑为编号笔误。为便于与英文原文对照，译本未重新编号。</p>
+</blockquote>
+<p>对于<strong>生成的</strong>书籍技能，优先使用用户级跨 agent 根目录 <code>~/.agents/skills/</code>——一份物理副本即可同时服务各跨 agent 宿主，以及（使用默认状态时的）OpenClaw。Copilot CLI 与 Amp 原生即可发现它；Claude Code 需要 <code>~/.claude/skills/&lt;skill_name&gt;</code> 处的符号链接（在 Step 10 创建，规则见 Step 5）。仅当用户明确要求时，才选择宿主私有或项目级根目录。<code>BOOK_TO_SKILL_SCOPE=project</code> 或 <code>personal</code> 可为自动化场景显式指定作用域；不要仅仅因为两种作用域都存在就强制追问作用域问题。</p>
+<hr />
+<h2 id="step-0-out-of-scope-check">Step 0 —— 范围外检查（Out-of-scope check）<a class="headerlink" href="#step-0-out-of-scope-check" title="Permanent link">&para;</a></h2>
+<p>如果没有提供任何参数，停止并回复：</p>
+<blockquote>
+<p>"book-to-skill 需要一个受支持的文档路径、文件夹或 glob 模式。用法：<code>book-to-skill &lt;path-to-document-folder-or-glob&gt;... [skill-name-slug]</code>"</p>
+</blockquote>
+<p>在整个工作流中：</p>
+<ul>
+<li><strong>先确定目标根目录。</strong> 在任何既有技能查找之前，先确定本次运行会写到哪里：按 Step 5 的表格与选择规则，取用户所用宿主的个人根目录或项目级根目录——项目级请求使用其项目级根目录，绝不写个人根目录。下文所说"已解析的根目录"（the resolved root）即指该目标。</li>
+<li>识别输入路径与可选的技能 slug。</li>
+<li>若最后一个参数不是存在的文件/文件夹、也不是能匹配到文件的 glob，且形如技能 slug（小写连字符、字母数字），则把它当作 <code>SKILL_NAME</code>。</li>
+<li>其余参数全部视为 <code>INPUT_PATHS</code> 列表。</li>
+<li>若任一输入路径本身就是技能目录（含 <code>SKILL.md</code> 与 <code>chapters/</code> 子目录），或 <code>SKILL_NAME</code> 与已解析根目录中的既有技能 slug 匹配，则把本次运行标记为<strong>更新/并入</strong>（Mode 4）。</li>
+<li><strong>重跑防护。</strong> 开始完整转换的提取之前，按 Step 5 的命名规则推导候选 slug——"作者-概念"形、"书名"形、以及用户给定的 <code>SKILL_NAME</code>——并在已解析根目录中检查是否已有匹配。命中即<strong>停止</strong>并询问用户："<code>&lt;skill-name&gt;</code> 已存在。请选择：(1) 更新/并入（Mode 4），(2) 校验既有技能的完整性后停止，或 (3) 强制完整重建。"用户选择之前不得重新提取。运行中断后恢复上下文时（网络断开、对话重放或续接），仅当上次运行报告的提取工作目录（其输出中的 <code>Workdir -&gt;</code> 路径，或你在 <code>BOOK_SKILL_WORKDIR</code> 中设定的路径）<strong>仍完好、且仍与本次输入和选项匹配</strong>时才可复用——目录存在、其 <code>metadata.json</code> 可读、所列 <code>sources</code> 与本次转换的文件在文件名<strong>与内容指纹</strong>上一一对应（提取器在 <code>metadata.json</code> 中为每个源记录 <code>sha256</code>；对每个文件按当前状态重算指纹并要求精确匹配——<code>book_to_skill/utils.py</code> 中的 <code>reuse_is_safe()</code> 就是这一检查的可执行形态）、且其记录的 <code>extraction_mode</code> 与本次使用的模式一致（即 Step 2 的"确认提取的确实是你要的那份文档"规则）。若目录缺失（临时目录被清理）、<code>metadata.json</code> 不存在、sources 不再匹配（文件名不同或内容指纹变化）、记录的 metadata 中某源没有 <code>sha256</code>（指纹机制引入之前记录的，无法确认新鲜度）、或模式不一致——如实说明并改为重新提取，不要续用。拿不准时，先问用户再决定丢弃还是续用。</li>
+</ul>
+<hr />
+<h2 id="step-1-validate-input">Step 1 —— 校验输入（Validate input）<a class="headerlink" href="#step-1-validate-input" title="Permanent link">&para;</a></h2>
+<p>确认 <code>INPUT_PATHS</code> 中至少有一个受支持的文件、目录或 glob 模式。
+对目录与 glob 进行展开，找出匹配的受支持文件（<code>.pdf</code>、<code>.epub</code>、<code>.docx</code>、<code>.txt</code>、<code>.md</code>、<code>.markdown</code>、<code>.rst</code>、<code>.adoc</code>、<code>.html</code>、<code>.htm</code>、<code>.rtf</code>、<code>.mobi</code>、<code>.azw</code>、<code>.azw3</code>）。</p>
+<p>找不到受支持文件时，停止并给出清晰的错误信息。</p>
+<hr />
+<h2 id="step-15-identify-content-type">Step 1.5 —— 识别内容类型（Identify content type）<a class="headerlink" href="#step-15-identify-content-type" title="Permanent link">&para;</a></h2>
+<p>提取之前，询问用户：</p>
+<blockquote>
+<p>"这些源文件属于哪类内容？这能帮我选择最合适的提取方法。</p>
+<ol>
+<li><strong>技术类（Technical）</strong>——含代码块、表格、公式、图示（如编程书、学术论文、架构指南）</li>
+<li><strong>文本为主（Text-heavy）</strong>——以散文为主，几乎没有表格/代码（如管理、效率、叙事非虚构）</li>
+<li><strong>不确定</strong>——我会用快速方法，若质量受限会提示你"</li>
+</ol>
+</blockquote>
+<p>把回答存为 <code>BOOK_TYPE</code>：</p>
+<ul>
+<li>选项 1 → <code>BOOK_TYPE=technical</code></li>
+<li>选项 2 → <code>BOOK_TYPE=text</code></li>
+<li>选项 3 → <code>BOOK_TYPE=text</code></li>
+</ul>
+<p><strong>若 <code>BOOK_TYPE=technical</code></strong>，先告知用户：</p>
+<blockquote>
+<p>"📐 已选择技术模式——使用 Docling 做结构感知提取（表格、代码块、公式保存为 markdown）。每页约 1.5 秒，较长的源文件预计需要几分钟。现在开始……"</p>
+</blockquote>
+<p><strong>若 <code>BOOK_TYPE=text</code></strong>，告知：</p>
+<blockquote>
+<p>"📄 已选择文本模式——对每种文件类型使用最快的可用提取器。纯文本/Markdown/HTML 通常几秒就绪；PDF 在可用时使用 pdftotext。"</p>
+</blockquote>
+<hr />
+<h2 id="step-2-extract-text">Step 2 —— 从源文档提取文本（Extract text）<a class="headerlink" href="#step-2-extract-text" title="Permanent link">&para;</a></h2>
+<p>运行提取脚本，传入输入路径：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">SCRIPT_PATH</span><span class="o">=</span><span class="s2">""</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">HERMES_HOME_RESOLVED</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">HERMES_HOME</span><span class="k">:-</span><span class="nv">$HOME</span><span class="p">/.hermes</span><span class="si">}</span><span class="s2">"</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">OPENCLAW_STATE_DIR_RESOLVED</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">OPENCLAW_STATE_DIR</span><span class="k">:-</span><span class="nv">$HOME</span><span class="p">/.openclaw</span><span class="si">}</span><span class="s2">"</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">PROJECT_ROOT</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>git<span class="w"> </span>rev-parse<span class="w"> </span>--show-toplevel<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span><span class="k">)</span><span class="s2">"</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nv">HERMES_PROJECT_TRUSTED</span><span class="o">=</span><span class="nb">false</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">HERMES_AGENT</span><span class="k">:-</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>hermes<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>python3<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span>hermes<span class="w"> </span>config<span class="w"> </span>get<span class="w"> </span>skills.trusted_project_dirs<span class="w"> </span>--json<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">PROJECT_ROOT</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">"</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s1">'import json, os, pathlib, sys; root=pathlib.Path(os.environ["PROJECT_ROOT"]).resolve(); sys.exit(not any(pathlib.Path(p).expanduser().resolve() == root for p in json.load(sys.stdin)))'</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="k">then</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="nv">HERMES_PROJECT_TRUSTED</span><span class="o">=</span><span class="nb">true</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="k">fi</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nv">CANDIDATES</span><span class="o">=(</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">  </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.copilot/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.agents/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">  </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.claude/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">OPENCLAW_STATE_DIR_RESOLVED</span><span class="si">}</span><span class="s2">/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">OPENCLAW_STATE_DIR_RESOLVED</span><span class="si">}</span><span class="s2">/skills"</span>/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">OPENCLAW_STATE_DIR_RESOLVED</span><span class="si">}</span><span class="s2">/skills"</span>/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">OPENCLAW_STATE_DIR_RESOLVED</span><span class="si">}</span><span class="s2">/skills"</span>/*/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">OPENCLAW_STATE_DIR_RESOLVED</span><span class="si">}</span><span class="s2">/skills"</span>/*/*/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">OPENCLAW_STATE_DIR_RESOLVED</span><span class="si">}</span><span class="s2">/skills"</span>/*/*/*/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">OPENCLAW_STATE_DIR_RESOLVED</span><span class="si">}</span><span class="s2">/skills"</span>/*/*/*/*/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">  </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.config/opencode/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">  </span><span class="s2">"</span><span class="nv">$HERMES_HOME_RESOLVED</span><span class="s2">/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">  </span><span class="s2">"</span><span class="nv">$HERMES_HOME_RESOLVED</span><span class="s2">"</span>/skills/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="o">)</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">HERMES_AGENT</span><span class="k">:-</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">  </span><span class="c1"># Project-local roots are resolved against the git worktree, not the current</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">  </span><span class="c1"># directory: an agent can be invoked from anywhere inside the project (e.g.</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="w">  </span><span class="c1"># `src/nested`) and these roots still have to be found — that is how OpenCode</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="w">  </span><span class="c1"># and the other hosts discover project skills. The CWD-relative forms are kept</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="w">  </span><span class="c1"># so the probe also works outside a git repository.</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="w">    </span><span class="nv">CANDIDATES</span><span class="o">+=(</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="w">      </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/.github/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="w">      </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/.claude/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="w">      </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/.agents/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="w">      </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/.opencode/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="w">    </span><span class="o">)</span>
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="w">  </span><span class="k">fi</span>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="w">  </span><span class="nv">CANDIDATES</span><span class="o">+=(</span>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="w">    </span><span class="s2">".github/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="w">    </span><span class="s2">".claude/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="w">    </span><span class="s2">".agents/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="w">    </span><span class="s2">"skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="w">    </span><span class="s2">"skills"</span>/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="w">    </span><span class="s2">"skills"</span>/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="w">    </span><span class="s2">"skills"</span>/*/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a><span class="w">    </span><span class="s2">"skills"</span>/*/*/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="w">    </span><span class="s2">"skills"</span>/*/*/*/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a><span class="w">    </span><span class="s2">"skills"</span>/*/*/*/*/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="w">    </span><span class="s2">".opencode/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a><span class="w">  </span><span class="o">)</span>
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a><span class="w">    </span><span class="nv">CANDIDATES</span><span class="o">+=(</span>
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a><span class="w">      </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a><span class="w">      </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/skills"</span>/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a><span class="w">      </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/skills"</span>/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a><span class="w">      </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/skills"</span>/*/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a><span class="w">      </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/skills"</span>/*/*/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a><span class="w">      </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/skills"</span>/*/*/*/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a><span class="w">      </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/skills"</span>/*/*/*/*/*/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a><span class="w">    </span><span class="o">)</span>
+<a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a><span class="w">  </span><span class="k">fi</span>
+<a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a><span class="k">fi</span>
+<a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a><span class="nv">CANDIDATES</span><span class="o">+=(</span>
+<a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a><span class="w">  </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.config/agents/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a><span class="w">  </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.config/amp/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a><span class="o">)</span>
+<a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$HERMES_PROJECT_TRUSTED</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a><span class="w">  </span><span class="nv">CANDIDATES</span><span class="o">=(</span>
+<a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a><span class="w">    </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/.hermes/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a><span class="w">    </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/.hermes/skills"</span>/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a><span class="w">    </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/.agents/skills/book-to-skill/scripts/extract.py"</span>
+<a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a><span class="w">    </span><span class="s2">"</span><span class="nv">$PROJECT_ROOT</span><span class="s2">/.agents/skills"</span>/*/book-to-skill/scripts/extract.py
+<a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a><span class="w">    </span><span class="s2">"</span><span class="si">${</span><span class="nv">CANDIDATES</span><span class="p">[@]</span><span class="si">}</span><span class="s2">"</span>
+<a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a><span class="w">  </span><span class="o">)</span>
+<a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a><span class="k">fi</span>
+<a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a><span class="k">for</span><span class="w"> </span>candidate<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">CANDIDATES</span><span class="p">[@]</span><span class="si">}</span><span class="s2">"</span>
+<a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a><span class="k">do</span>
+<a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$candidate</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a><span class="w">    </span><span class="nv">SCRIPT_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$candidate</span><span class="s2">"</span>
+<a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a><span class="w">    </span><span class="k">break</span>
+<a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a><span class="w">  </span><span class="k">fi</span>
+<a id="__codelineno-1-87" name="__codelineno-1-87" href="#__codelineno-1-87"></a><span class="k">done</span>
+<a id="__codelineno-1-88" name="__codelineno-1-88" href="#__codelineno-1-88"></a>
+<a id="__codelineno-1-89" name="__codelineno-1-89" href="#__codelineno-1-89"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">"</span><span class="nv">$SCRIPT_PATH</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-1-90" name="__codelineno-1-90" href="#__codelineno-1-90"></a><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Could not find scripts/extract.py for book-to-skill"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<a id="__codelineno-1-91" name="__codelineno-1-91" href="#__codelineno-1-91"></a><span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-1-92" name="__codelineno-1-92" href="#__codelineno-1-92"></a><span class="k">fi</span>
+<a id="__codelineno-1-93" name="__codelineno-1-93" href="#__codelineno-1-93"></a>
+<a id="__codelineno-1-94" name="__codelineno-1-94" href="#__codelineno-1-94"></a><span class="nv">PYTHON_BIN</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">PYTHON_BIN</span><span class="k">:-</span><span class="nv">python3</span><span class="si">}</span><span class="s2">"</span>
+<a id="__codelineno-1-95" name="__codelineno-1-95" href="#__codelineno-1-95"></a><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PYTHON_BIN</span><span class="s2">"</span><span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-1-96" name="__codelineno-1-96" href="#__codelineno-1-96"></a><span class="w">  </span><span class="nv">PYTHON_BIN</span><span class="o">=</span><span class="s2">"python"</span>
+<a id="__codelineno-1-97" name="__codelineno-1-97" href="#__codelineno-1-97"></a><span class="k">fi</span>
+<a id="__codelineno-1-98" name="__codelineno-1-98" href="#__codelineno-1-98"></a>
+<a id="__codelineno-1-99" name="__codelineno-1-99" href="#__codelineno-1-99"></a><span class="s2">"</span><span class="nv">$PYTHON_BIN</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$SCRIPT_PATH</span><span class="s2">"</span><span class="w"> </span><span class="nv">$INPUT_PATHS</span><span class="w"> </span>--mode<span class="w"> </span>&lt;BOOK_TYPE&gt;<span class="w"> </span>--install-missing<span class="w"> </span>ask
+</code></pre></div>
+<p>（上方脚本原样保留。它在多种宿主根目录中探测 <code>scripts/extract.py</code>：包含 Hermes 受信项目目录的优先分支（<code>hermes config get skills.trusted_project_dirs</code> 校验）、项目级根目录（相对 git worktree 根而非当前目录解析，使 agent 从项目内任意位置调用都能命中）、以及多层嵌套 <code>skills/</code> 的 glob 兜底；最后以 <code>--mode &lt;BOOK_TYPE&gt; --install-missing ask</code> 调用，<code>&lt;BOOK_TYPE&gt;</code> 用 Step 1.5 的取值替换。）</p>
+<p>提取开始前，脚本会按检测到的格式检查所需的可选 Python 包。若缺少更好的提取器，它会向用户提示可用的回退方案。非交互会话默认走回退，除非安装模式显式设为 <code>yes</code>。</p>
+<p><strong>提示——环境预检：</strong> 运行 <code>"$PYTHON_BIN" "$SCRIPT_PATH" --check</code> 可打印按格式的报告：哪些提取器已安装、缺什么、缺的确切安装命令，且不处理任何文件。排查安装或质量问题时有用了。</p>
+<p>这会创建一个<strong>每次运行独立</strong>的工作目录——默认 <code>&lt;tempdir&gt;/book_skill_work-&lt;pid&gt;/</code>，或你在 <code>BOOK_SKILL_WORKDIR</code> 中设定的确切路径——其中包含：</p>
+<ul>
+<li><code>full_text.txt</code> ——所有源文件合并提取的文本，源之间有清晰的视觉分界。</li>
+<li><code>metadata.json</code> ——总体合并大小、词数、页数、token 数、被丢弃的 EPUB 图片数、解析后的 <code>workdir</code>，以及逐源处理详情的 <code>sources</code> 列表。</li>
+</ul>
+<p>运行结束时打印全部三个路径（<code>Workdir -&gt;</code>、<code>Text -&gt;</code>、<code>Meta -&gt;</code>）。<strong>从该输出（或 <code>metadata.json</code> 自身的 <code>workdir</code> 字段）取路径，不要假定固定位置</strong>——目录名每次运行都不同，这样同一台机器上的并发提取才不会互相覆盖结果。</p>
+<p>读取本次运行的 <code>metadata.json</code> 查看结果。</p>
+<p><strong>生成任何内容之前，务必确认提取到的确实是你要的那份文档</strong>：检查 <code>metadata.json</code> 里的 <code>filename</code> / <code>source_file</code>，或 <code>full_text.txt</code> 首行的 <code>SOURCE:</code> 头。若在等待后台运行，就等<strong>它那个</strong>工作目录——轮询共享路径可能读到另一次运行的输出。</p>
+<hr />
+<h2 id="step-25-pre-flight-cost-estimate">Step 2.5 —— 生成前成本预估（Pre-flight cost estimate）<a class="headerlink" href="#step-25-pre-flight-cost-estimate" title="Permanent link">&para;</a></h2>
+<p>读取本次运行的 <code>metadata.json</code>（提取输出中 <code>Meta -&gt;</code> 的路径），在<strong>做任何生成之前</strong>向用户出示预估：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>📖 Sources detected: &lt;total_sources&gt; source(s)
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&lt;list each source filename and format from the sources metadata list&gt;
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>&lt;if images_dropped &gt; 5: warn that N source images were not read&gt;
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>📄 Combined Pages/Sections: ~&lt;N&gt; | Words: ~&lt;N&gt; | Total tokens: ~&lt;N&gt;K
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>💰 Estimated token cost (Full Conversion / Update):
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>   Input  (reading + prompts): ~&lt;N&gt;K tokens
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>   Output (skill files generated/updated):  ~&lt;N&gt;K tokens
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>   Total:                           ~&lt;N&gt;K tokens
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>   Cost: multiply the token counts above by your model's current
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>   input/output per-1M-token rates (prices and model names change often —
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>   do not hardcode them; quote today's rate and label it as an estimate).
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>   ⏱  Estimated time: ~&lt;N&gt; minutes
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>📁 Files to be generated/updated:
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>   SKILL.md + chapter files + glossary + patterns + cheatsheet
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>➡  Proceed with Full Conversion / Update? (or type "analyze only" to preview first)
+</code></pre></div>
+<p>（模板提示行保留英文原文；实际对话语言由宿主与用户决定。模板含义：检测到的源数与格式清单；图片丢弃数 &gt; 5 时提示有 N 张源图未被读取；合并页数/词数/总 token 数；完整转换或更新的 token 成本预估——输入（读取 + 提示开销）与输出（生成的技能文件）分开列；成本按用户模型当前的每百万 token 单价折算；预估耗时；将生成/更新的文件清单；最后请用户确认继续，或输入 "analyze only" 先看预览。）</p>
+<p><strong>估算方法：</strong></p>
+<ul>
+<li>输入 token ≈ metadata 的 <code>estimated_tokens</code> × 1.3（每章一遍的提示开销）</li>
+<li>输出 token ≈ 章节数 × 每章预算 + 4,000（SKILL.md）+ 4,500（glossary + patterns + cheatsheet）</li>
+<li>每章预算中点按 <code>BOOK_TYPE</code> 取（<code>DEPTH</code> 在 Step 4 决定，可能上调预算）：<code>text</code> ≈ 1,000，<code>technical</code> ≈ 1,800。若用户已表明"仅参考"还是"深度研读"，用 Step 7 矩阵中对应行的数值。</li>
+<li>成本：报出 token 数，乘以用户当前模型的每百万 token 输入/输出单价。<strong>不要硬编码金额</strong>——模型名与价格经常变；若展示金额，标注为估算并注明日期。</li>
+</ul>
+<p>等用户确认后再继续。用户若说 "analyze only"，切换到 Mode 2。</p>
+<hr />
+<h2 id="step-26-repl-repl-style-access-50k-token">Step 2.6 —— 大部头书籍的 REPL 式访问（REPL-style access，&gt; 50k token）<a class="headerlink" href="#step-26-repl-repl-style-access-50k-token" title="Permanent link">&para;</a></h2>
+<p>灵感来自递归语言模型（Recursive Language Model, RLM）范式：把 <code>full_text.txt</code> 当作可查询的语料，而不是一次性整体读取。把整个文件载入上下文，会烧掉你在生成阶段还需要的预算。</p>
+<p>对约 50k token 以上的书，优先使用程序化探针，而不是无上界的 <code>Read(full_text.txt)</code>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Size check before any Read</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>wc<span class="w"> </span>-w<span class="w"> </span><span class="s2">"</span><span class="nv">$FULL_TEXT_PATH</span><span class="s2">"</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Find chapter offsets without loading the whole file</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>grep<span class="w"> </span>-n<span class="w"> </span>-E<span class="w"> </span><span class="s2">"^\s*(Chapter|CHAPTER)\s+[0-9]+"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$FULL_TEXT_PATH</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-40
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Pull only the chapter you need (lines start..end inclusive)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'&lt;start&gt;,&lt;end&gt;p'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$FULL_TEXT_PATH</span><span class="s2">"</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># Verify a framework is actually mentioned before claiming it in SKILL.md</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>grep<span class="w"> </span>-c<span class="w"> </span>-i<span class="w"> </span><span class="s2">"westrum\|dora"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$FULL_TEXT_PATH</span><span class="s2">"</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="c1"># Targeted Read with offset/limit avoids dumping the full file</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1"># Read(file_path=full_text.txt, offset=&lt;line&gt;, limit=&lt;lines&gt;)</span>
+</code></pre></div>
+<p>（探针含义：任何 Read 之前先 <code>wc -w</code> 查词数；<code>grep -n</code> 不载入全文就找到章节偏移；<code>sed -n '&lt;start&gt;,&lt;end&gt;p'</code> 只拉取需要的章；在 SKILL.md 里宣称某框架存在之前先用 <code>grep -c</code> 验证；用带 offset/limit 的定向 Read 替代整文件读取。）</p>
+<p>在 Step 3（结构分析）、Step 7（逐章摘要）与 Step 8（词汇表/模式提取）中都采用这一做法。50k token 以下的书，一次 <code>Read</code> 即可。</p>
+<p>为什么这很重要：一本 200 页的书约 75k token。每章重读一遍全文（28 遍）要花约 2M 输入 token；用 grep + sed 只拉取相关片段，能让生成成本正比于<strong>产出</strong>而非<strong>源文件</strong>。</p>
+<hr />
+<h2 id="step-3-analyze-book-structure">Step 3 —— 分析书籍结构（Analyze book structure）<a class="headerlink" href="#step-3-analyze-book-structure" title="Permanent link">&para;</a></h2>
+<p>读取提取文本 <code>full_text.txt</code> 的前 8,000 字符，识别：</p>
+<ul>
+<li>书<strong>名</strong>与<strong>作者</strong></li>
+<li><strong>章节结构</strong>（找 "Chapter N"、"PART I"、编号标题、目录）</li>
+<li><strong>核心主题</strong>与题材领域</li>
+<li>章节的大致数量</li>
+</ul>
+<p>然后读取目录（Table of Contents）部分（若存在），把所有章节映射出来。</p>
+<p><strong>若模式为"仅分析"：</strong> 现在就产出提取报告并停止。结构如下：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>## Extraction Report — &lt;Title&gt;
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>### Author's Core Frameworks
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>- **&lt;Framework Name&gt;**: &lt;what it is and when to apply&gt;
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>### Key Principles
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>- &lt;Principle&gt;: &lt;actionable rule&gt;
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>### Techniques &amp; Methods
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>- &lt;Technique&gt;: &lt;step-by-step or how-to&gt;
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>### Anti-patterns
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>- &lt;What to avoid&gt;: &lt;why&gt;
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>### Suggested Skill Name
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>`{author-lastname}-{core-concept}` — e.g. `cialdini-influence`
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>### Chapters Detected
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>| # | Title | Main Frameworks |
+</code></pre></div>
+<p>（模板字段含义：<code>&lt;书名&gt;</code> 的提取报告——作者核心框架（名称 + 是什么 + 何时应用）/ 关键原则（可行动规则）/ 技巧与方法（分步或怎么做）/ 反模式（避免什么 + 为什么）/ 建议技能名 <code>{author-lastname}-{core-concept}</code>（如 <code>cialdini-influence</code>）/ 检测到的章节表（#、标题、主要框架）。）</p>
+<hr />
+<h2 id="step-4-ask-purpose">Step 4 —— 询问用途（Ask purpose，仅完整转换）<a class="headerlink" href="#step-4-ask-purpose" title="Permanent link">&para;</a></h2>
+<p>生成之前，询问用户：</p>
+<blockquote>
+<p>"你想让这个技能帮你做什么？（选一项或多项）
+1. 工作时应用作者的框架
+2. 用作者的思维模型思考
+3. 查阅具体章节与概念
+4. 以上全部"</p>
+</blockquote>
+<p>用回答来加权 SKILL.md 核心区（Core section）的内容取舍。</p>
+<p><strong>从回答推导 <code>DEPTH</code>（不额外追问）：</strong></p>
+<ul>
+<li>回答<strong>只有</strong>选项 3（查阅）→ <code>DEPTH=reference</code>——精简、快速查找型章节。</li>
+<li>回答含选项 1、2 或 4 → <code>DEPTH=study</code>——更深的章节，带更多演算细节、例子与推理。</li>
+</ul>
+<p><code>DEPTH</code> 与 <code>BOOK_TYPE</code> 共同决定 Step 7 的每章 token 预算。<strong>不要</strong>再单独问"研读还是查阅"——它在这里推断。（Mode 2/3 跳过 Step 4，默认 <code>DEPTH=study</code>。）</p>
+<hr />
+<h2 id="step-5-determine-skill-name">Step 5 —— 确定技能名（Determine skill name）<a class="headerlink" href="#step-5-determine-skill-name" title="Permanent link">&para;</a></h2>
+<p>若提供了 <code>SKILL_NAME</code>，直接用作技能 slug。
+否则提出两个方案，让用户选：</p>
+<ul>
+<li><strong>按作者-概念</strong>：<code>{author-lastname}-{core-concept}</code>（如 <code>cialdini-influence</code>、<code>meadows-systems</code>）</li>
+<li><strong>按书名</strong>：书名转小写连字符（如 <code>designing-data-intensive-apps</code>）</li>
+</ul>
+<p>若该书有鲜明的方法论个性，默认选作者-概念格式。</p>
+<p>选定目标技能根目录（<code>SKILLS_HOME</code>）。先从用户显式请求或 <code>BOOK_TO_SKILL_SCOPE</code> 解析<strong>作用域（scope）</strong>，再探测<strong>宿主（host）</strong>。请求项目级/项目输出 → 选项目级行；请求个人/全局输出 → 选个人行。两者都未请求时，维持既定的个人默认（非 Hermes 宿主为 <code>~/.agents/skills</code>）。不要仅仅因为存在项目级根目录就强制追问作用域。选定的根目录在写入前可能仍需宿主授权。</p>
+<table>
+<thead>
+<tr>
+<th>宿主 agent</th>
+<th>个人技能根目录</th>
+<th>项目级根目录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GitHub Copilot CLI</strong></td>
+<td><code>~/.agents/skills</code>（原生发现）</td>
+<td><code>.github/skills</code> → <code>.claude/skills</code> → <code>.agents/skills</code></td>
+</tr>
+<tr>
+<td><strong>Amp</strong></td>
+<td><code>~/.agents/skills</code>（原生发现）</td>
+<td><code>.agents/skills</code></td>
+</tr>
+<tr>
+<td><strong>OpenAI Codex</strong></td>
+<td><code>~/.agents/skills</code>（原生发现；跟随符号链接）</td>
+<td><code>.agents/skills</code></td>
+</tr>
+<tr>
+<td><strong>Hermes Agent</strong></td>
+<td><code>$HERMES_HOME/skills/&lt;category&gt;</code>（默认 <code>~/.hermes/skills/&lt;category&gt;</code>）</td>
+<td><code>.hermes/skills/&lt;category&gt;</code> → <code>.agents/skills</code></td>
+</tr>
+<tr>
+<td><strong>Claude Code</strong></td>
+<td><code>~/.agents/skills</code> + 从 <code>~/.claude/skills/&lt;skill_name&gt;</code> 建符号链接</td>
+<td><code>.claude/skills</code></td>
+</tr>
+<tr>
+<td><strong>OpenClaw</strong></td>
+<td><code>${OPENCLAW_STATE_DIR:-~/.openclaw}/skills</code>（活跃状态；<code>~/.agents/skills</code> 仅默认状态）</td>
+<td><code>.agents/skills</code> → <code>skills/</code></td>
+</tr>
+<tr>
+<td><strong>OpenCode</strong></td>
+<td><code>~/.agents/skills</code>（原生发现；也会读取 <code>~/.config/opencode/skills</code> 与 <code>~/.claude/skills</code>）</td>
+<td><code>.opencode/skills</code> → <code>.agents/skills</code> → <code>.claude/skills</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>译注③</strong>：原文中 OpenCode 这一行（L405）出现在表格之外、位于 Hermes 说明段之后，与表格分离；译本将其并回表格以便阅读，行内容未改动。</p>
+</blockquote>
+<p>Hermes Agent 是唯一保留自己个人根目录的宿主：它按类别（category）划分个人技能，不扫描跨 agent 根目录。使用活跃 profile 的 <code>HERMES_HOME</code>，并选择与生成技能主题匹配的类别。不要手工构造 profile 路径。若用户选择 Hermes 项目级根目录，生成后运行 <code>hermes skills trust &lt;project-root&gt;</code>，并用 <code>hermes skills list</code> 验证可发现性；项目受信之前，项目技能不可用。</p>
+<blockquote>
+<p><strong>译注④</strong>：上一段在原文 L402 与 L407 逐字重复出现两次，译本合并为一处。</p>
+</blockquote>
+<p>对 OpenClaw，使用活跃状态目录的 <code>skills/</code> 根：<code>${OPENCLAW_STATE_DIR:-~/.openclaw}/skills/</code>。共享的 <code>~/.agents/skills</code> 兼容根仅在 <code>OPENCLAW_STATE_DIR</code> 未设置或为默认 <code>~/.openclaw</code> 时可被发现；使用非默认状态时，不得声称 OpenClaw 能看到共享根里的安装。生成后用 <code>openclaw skills list</code> 验证可发现性。</p>
+<p>OpenCode 原生扫描跨 agent 根 <code>~/.agents/skills</code>，因此上面的生成技能默认已经覆盖它——无需符号链接、无需信任步骤。它也会读取自己管理的 <code>~/.config/opencode/skills</code> 根与 Claude 兼容根 <code>~/.claude/skills</code>；仅当用户主动要求时才用 OpenCode 管理的根。项目技能靠从工作目录向上遍历到 git worktree 来发现，因此生成后若技能未出现，开一个新会话。（<code>~/.cache/opencode/skills</code> 是 <code>skills.urls</code> 的远程技能下载缓存，不是创作根目录——绝不要把生成的技能写进去。）</p>
+<p>选择规则（Selection rules）：</p>
+<ol>
+<li>个人安装：<code>SKILLS_HOME</code> 设为 <code>~/.agents/skills</code>（不存在则创建）。一个例外，避免在别人家发明约定：若 <code>~/.agents/skills</code> 不存在<strong>且</strong>宿主私有根已有技能，改用私有根，并在报告中说明原因。</li>
+<li><strong>Claude Code 不扫描 <code>~/.agents/skills</code></strong>——生成完成后，Step 10 用 <code>ln -sfn "$HOME/.agents/skills/&lt;skill_name&gt;" "$HOME/.claude/skills/&lt;skill_name&gt;"</code> 把技能链接过去。</li>
+<li><strong>Hermes Agent 个人安装用上表 Hermes 行</strong>，不用跨 agent 根，也不打符号链接。</li>
+<li>用户明确要求宿主私有根（<code>~/.copilot/skills</code>、<code>~/.claude/skills</code>、<code>~/.config/agents/skills</code>、<code>~/.config/amp/skills</code>）时，照办并跳过符号链接。</li>
+<li>用户明确要求项目级输出时，用其宿主的项目级行。</li>
+<li>该选择需要知道宿主（项目级输出、Hermes 个人根、OpenClaw 状态根或 Claude Code 符号链接）而你无法判断时，问："你在哪个 agent 里运行——OpenCode、OpenClaw、Hermes Agent、GitHub Copilot CLI、Amp、Codex 还是 Claude Code？"</li>
+<li>OpenClaw 个人输出用 <code>${OPENCLAW_STATE_DIR:-$HOME/.openclaw}/skills</code>。仅当 <code>OPENCLAW_STATE_DIR</code> 未设置或等于默认 <code>$HOME/.openclaw</code> 时，共享根 <code>~/.agents/skills</code> 才是有效的 OpenClaw 目的地；否则用活跃状态根或项目/额外目录。</li>
+<li>用户明确要求 OpenClaw 管理的个人根时，用活跃状态根，并用 <code>openclaw skills list</code> 验证可发现性。</li>
+</ol>
+<p>把 <code>SKILLS_HOME</code> 设为选定的根，并检查 <code>$SKILLS_HOME/&lt;skill_name&gt;/</code> 是否已存在。Claude Code 下还要检查 <code>~/.claude/skills/&lt;skill_name&gt;</code> 是否为<strong>真实目录</strong>（而非符号链接）——可能有一次旧安装在那里；若有，先提议迁移（把该目录移入 <code>~/.agents/skills/</code>，并把原路径替换为符号链接）再继续。
+若技能已存在，提示用户三选一：</p>
+<ol>
+<li><strong>更新/并入</strong>（Mode 4）——把新文件/内容整合进既有技能组件。</li>
+<li><strong>覆盖</strong>——删除并从零重建技能。</li>
+<li><strong>改名</strong>——追加 <code>-2</code> 或换一个自定义 slug。</li>
+</ol>
+<p>用户选<strong>更新/并入</strong>时，立即进入 Step 2.5 之后的<strong>更新/并入工作流</strong>一节（跳过 Step 3、4、6、7、8、9）。</p>
+<hr />
+<h2 id="step-6-create-skill-directory-structure">Step 6 —— 创建技能目录结构（Create skill directory structure）<a class="headerlink" href="#step-6-create-skill-directory-structure" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$SKILLS_HOME</span><span class="s2">/&lt;skill_name&gt;/chapters"</span>
+</code></pre></div>
+<hr />
+<h2 id="step-7-generate-chapter-summaries">Step 7 —— 生成章节摘要（Generate chapter summaries）<a class="headerlink" href="#step-7-generate-chapter-summaries" title="Permanent link">&para;</a></h2>
+<p><strong>TOKEN 预算规则——关键（自适应）：</strong></p>
+<p>每章预算随 <code>BOOK_TYPE</code> 与 <code>DEPTH</code> 缩放。技术章节需要容纳代码与表格的空间；研读深度需要容纳演算推理的空间。从下述矩阵取预算：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>DEPTH=reference</code></th>
+<th><code>DEPTH=study</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BOOK_TYPE=text</code></td>
+<td>800–1,200 token</td>
+<td>1,000–1,800 token</td>
+</tr>
+<tr>
+<td><code>BOOK_TYPE=technical</code></td>
+<td>1,200–1,800 token</td>
+<td>2,000–3,000 token</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>这些是每文件的目标值，不是硬上限——内容密的章节可以超一些，内容薄的可以少一些。密度仍胜过长度（质量规则 #3）：绝不为了凑数而注水。</li>
+<li>文件按需加载，更大的章节只在该章被实际读取时才花 token。</li>
+<li>在两个格之间拿不准（如混合内容书）时，用较低的预算，深度来自精度而非体量。</li>
+</ul>
+<p><strong><code>DEPTH=study</code> 要靠内容挣得，而不是靠更大的数字。</strong> 标准章节模板（Core Idea → Connects To）的自然落点是一篇 700–900 token 左右的密实散文。要<strong>诚实地</strong>达到研读预算——而不是注水——研读级章节必须增加具体材料：</p>
+<ul>
+<li>从本章<strong>复现一个演算示例或成品工件</strong>（如示例新闻稿、一段样例对话、一份填好的模板、作者走完一遍的决策过程），放进 <code>## Worked Example</code> 小节。这是最大的杠杆，也是学习者回访的主要原因。</li>
+<li>把每个框架的"How"<strong>展开</strong>为明确的步骤或判据，不要一行带过。</li>
+<li>给最重要的 1–2 个框架<strong>补一条 "Why it works / failure mode" 简注</strong>。</li>
+</ul>
+<p>若某章确实没有演算示例、也难以扩展，就让它落在研读下限之下，不要注水——并在该章的 Core Idea 中注明它偏薄。相比之下，<code>reference</code> 深度的章节刻意省略演算示例，只保留可直接用于决策的要点。</p>
+<p>对 Step 3 识别出的<strong>每一章/主要小节</strong>：</p>
+<p>读取提取文本 <code>full_text.txt</code> 的对应部分（用字符偏移或 grep 章节标题定位）。</p>
+<p>按下述结构创建 <code>$SKILLS_HOME/&lt;skill_name&gt;/chapters/ch&lt;NN&gt;-&lt;slug&gt;.md</code>。</p>
+<p><strong>按 <code>BOOK_TYPE</code> 调整侧重：</strong></p>
+<ul>
+<li><code>technical</code> → 优先 "Code Examples"、"Reference Tables"、"Commands &amp; APIs" 小节；保留精确语法</li>
+<li><code>text</code> → 优先 "Frameworks Introduced"、"Mental Models"、"Key Takeaways"；空置的技术小节直接省略</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="gh"># Chapter N: &lt;Full Title&gt;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="gu">## Core Idea</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>&lt;1–2 sentences: the single most important thing this chapter teaches&gt;
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="gu">## Frameworks Introduced</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="k">-</span><span class="w"> </span><span class="gs">**&lt;Framework Name&gt;**</span>: &lt;exact formulation — preserve the author's naming&gt;
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">  </span><span class="k">-</span><span class="w"> </span>When to use: &lt;specific situation&gt;
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span><span class="k">-</span><span class="w"> </span>How: &lt;steps or criteria&gt;
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="gu">## Key Concepts</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="k">-</span><span class="w"> </span><span class="gs">**&lt;Term&gt;**</span>: &lt;precise definition in 1 sentence&gt;
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>(5–10 most important terms from this chapter)
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="gu">## Mental Models</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>&lt;2–4 frameworks or thinking tools. Write as "Use X when Y" or "Think of X as Y"&gt;
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="gu">## Anti-patterns</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="k">-</span><span class="w"> </span><span class="gs">**&lt;What to avoid&gt;**</span>: &lt;why it fails&gt;
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="gu">## Code Examples *(technical books only — omit if BOOK_TYPE=text)*</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>&lt;!-- Copy the most instructive snippet from the chapter. Preserve indentation exactly. --&gt;
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>```&lt;language&gt;
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>&lt;key code example from this chapter&gt;
+</code></pre></div>
+- <strong>What it demonstrates</strong>: <one line></p>
+<h2 id="reference-tables-technical-books-only-omit-if-book_typetext">Reference Tables <em>(technical books only — omit if BOOK_TYPE=text)</em><a class="headerlink" href="#reference-tables-technical-books-only-omit-if-book_typetext" title="Permanent link">&para;</a></h2>
+<!-- Reproduce any comparison matrix, parameter table, or decision table from the chapter in markdown. -->
+
+<h2 id="worked-example-depthstudy-only-omit-for-depthreference">Worked Example <em>(DEPTH=study only — omit for DEPTH=reference)</em><a class="headerlink" href="#worked-example-depthstudy-only-omit-for-depthreference" title="Permanent link">&para;</a></h2>
+<!-- Reproduce or reconstruct one concrete example the author works through: a
+     sample document, a dialogue, a filled-in template, a before/after, or a
+     decision walked end-to-end. This is what makes a study chapter worth its
+     budget. Keep it faithful to the source; never copy long raw passages —
+     reconstruct the example compactly. -->
+
+<h2 id="key-takeaways">Key Takeaways<a class="headerlink" href="#key-takeaways" title="Permanent link">&para;</a></h2>
+<ol>
+<li><Actionable insight></li>
+<li><Actionable insight></li>
+<li><Actionable insight>
+(3–7 takeaways a practitioner must remember)</li>
+</ol>
+<h2 id="connects-to">Connects To<a class="headerlink" href="#connects-to" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Ch N</strong>: <why this chapter relates></li>
+<li><strong><Concept></strong>: <external concept or standard it connects with>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>**章节模板结构说明**（模板保留英文原文；各小节用途与约束）：
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>| 模板小节 | 用途与约束 |
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>|---|---|
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>| `# Chapter N: &lt;Full Title&gt;` | 章标题，N 为章号 |
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>| `## Core Idea` | 1–2 句：本章教的最重要的一件事 |
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>| `## Frameworks Introduced` | 具名框架 + 适用时机（When to use）+ How（步骤或判据）；保留作者的原命名 |
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>| `## Key Concepts` | 本章 5–10 个最重要术语，各配 1 句精确定义 |
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>| `## Mental Models` | 2–4 个框架或思维工具，写成 "Use X when Y" / "Think of X as Y" 句式 |
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>| `## Anti-patterns` | 要避免什么 + 为何失败 |
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>| `## Code Examples` | 仅技术书（`BOOK_TYPE=text` 时省略）；复制本章最有教学价值的片段，缩进原样保留，附一行"演示了什么" |
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>| `## Reference Tables` | 仅技术书；用 markdown 复现对比矩阵、参数表或决策表 |
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>| `## Worked Example` | 仅 `DEPTH=study`（`reference` 省略）；复现或紧凑重构作者走完的一个具体示例（样例文档/对话/填好的模板/前后对照/端到端决策）；忠实于源，绝不整段照抄原文长段落 |
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>| `## Key Takeaways` | 3–7 条从业者必须记住的可行动要点 |
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>| `## Connects To` | 与其他章（Ch N）及外部概念/标准的关联 |
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>---
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>## Step 8 —— 生成支撑文件（Generate supporting files）
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>### glossary.md
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>创建 `$SKILLS_HOME/&lt;skill_name&gt;/glossary.md`：
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>- 书中所有重要术语，按字母序排列
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>- 格式：`**Term** — definition (Ch N)`
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>- 上限 1,500 token
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a>### patterns.md
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a>
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a>创建 `$SKILLS_HOME/&lt;skill_name&gt;/patterns.md`：
+<a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a>
+<a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a>- 书中所有具体技巧、设计模式、算法
+<a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a>- 格式：`## Pattern Name\n**When to use**: ...\n**How**: ...\n**Trade-offs**: ...`
+<a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a>- 上限 2,000 token
+<a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a>
+<a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a>### cheatsheet.md
+<a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a>
+<a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a>创建 `$SKILLS_HOME/&lt;skill_name&gt;/cheatsheet.md`：
+<a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a>
+<a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a>**这是技能中区分度最高的一层——把它当作推理辅助，而不是关键词清单。** 任何人都能在词汇表里 grep 到一个术语。速查表捕获的是作者的*判断力*：他们会做什么决定、为什么。它就是把"我知道这些词"变成"我会像作者那样行动"的那份文件。
+<a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a>
+<a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a>按以下顺序排定优先级：
+<a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a>
+<a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a>1. **决策规则**——"遇到 X 就做 Y，因为 Z。"作者应用的 if/then 逻辑，表述到读者无需重读全书就能套用的程度。
+<a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a>2. **决策树 / 流程图**（嵌套列表或小表格）——用于超过两个分支的选择。
+<a id="__codelineno-7-46" name="__codelineno-7-46" href="#__codelineno-7-46"></a>3. **权衡矩阵**——按作者在意的维度给相互竞争的选项打分，读者可在自己的约束下做选择。
+<a id="__codelineno-7-47" name="__codelineno-7-47" href="#__codelineno-7-47"></a>4. **阈值与默认值**——作者承诺遵循的具体数字、比率或经验法则（如"函数保持在 ~20 行以内"、"错误预算 &lt; 10% 时告警"）。
+<a id="__codelineno-7-48" name="__codelineno-7-48" href="#__codelineno-7-48"></a>5. **信号与坏味道（Tells &amp; smells）**——快速识别处境的启发式（"看到 X，你可能正陷入 Y"）。
+<a id="__codelineno-7-49" name="__codelineno-7-49" href="#__codelineno-7-49"></a>
+<a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a>避免：术语→定义的干条目（那是词汇表的活），以及成段的散文（那是章节的活）。每一行都应帮读者**决定**点什么。
+<a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a>
+<a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a>- 格式以紧凑表格与决策规则为主；内容相当于工作时放在手边的一页打印纸。
+<a id="__codelineno-7-53" name="__codelineno-7-53" href="#__codelineno-7-53"></a>- 上限 1,200 token。
+<a id="__codelineno-7-54" name="__codelineno-7-54" href="#__codelineno-7-54"></a>
+<a id="__codelineno-7-55" name="__codelineno-7-55" href="#__codelineno-7-55"></a>---
+<a id="__codelineno-7-56" name="__codelineno-7-56" href="#__codelineno-7-56"></a>
+<a id="__codelineno-7-57" name="__codelineno-7-57" href="#__codelineno-7-57"></a>## Step 9 —— 生成主 SKILL.md（Generate the master SKILL.md）
+<a id="__codelineno-7-58" name="__codelineno-7-58" href="#__codelineno-7-58"></a>
+<a id="__codelineno-7-59" name="__codelineno-7-59" href="#__codelineno-7-59"></a>**关键 token 预算：SKILL.md 正文保持在 4,000 token 以内。**
+<a id="__codelineno-7-60" name="__codelineno-7-60" href="#__codelineno-7-60"></a>压缩（compaction）从尾部截断——把最重要的内容放最前面。
+<a id="__codelineno-7-61" name="__codelineno-7-61" href="#__codelineno-7-61"></a>
+<a id="__codelineno-7-62" name="__codelineno-7-62" href="#__codelineno-7-62"></a>创建 `$SKILLS_HOME/&lt;skill_name&gt;/SKILL.md`：
+<a id="__codelineno-7-63" name="__codelineno-7-63" href="#__codelineno-7-63"></a>
+<a id="__codelineno-7-64" name="__codelineno-7-64" href="#__codelineno-7-64"></a>```markdown
+<a id="__codelineno-7-65" name="__codelineno-7-65" href="#__codelineno-7-65"></a>---
+<a id="__codelineno-7-66" name="__codelineno-7-66" href="#__codelineno-7-66"></a>name: &lt;skill_name&gt;
+<a id="__codelineno-7-67" name="__codelineno-7-67" href="#__codelineno-7-67"></a>description: "Knowledge base from \"&lt;Full Title&gt;\" by &lt;Author(s)&gt;. Use when applying &lt;author&gt;'s frameworks for &lt;key topics, 3–6 terms&gt;, studying the book, or referencing its concepts."
+<a id="__codelineno-7-68" name="__codelineno-7-68" href="#__codelineno-7-68"></a>---
+<a id="__codelineno-7-69" name="__codelineno-7-69" href="#__codelineno-7-69"></a>
+<a id="__codelineno-7-70" name="__codelineno-7-70" href="#__codelineno-7-70"></a>&lt;!-- argument-hint: [topic, framework name, or chapter number] --&gt;
+<a id="__codelineno-7-71" name="__codelineno-7-71" href="#__codelineno-7-71"></a>
+<a id="__codelineno-7-72" name="__codelineno-7-72" href="#__codelineno-7-72"></a># &lt;Full Title&gt;
+<a id="__codelineno-7-73" name="__codelineno-7-73" href="#__codelineno-7-73"></a>**Author**: &lt;Author(s)&gt; | **Pages**: ~&lt;N&gt; | **Chapters**: &lt;N&gt; | **Generated**: &lt;YYYY-MM-DD&gt;
+<a id="__codelineno-7-74" name="__codelineno-7-74" href="#__codelineno-7-74"></a>
+<a id="__codelineno-7-75" name="__codelineno-7-75" href="#__codelineno-7-75"></a>## How to Use This Skill
+<a id="__codelineno-7-76" name="__codelineno-7-76" href="#__codelineno-7-76"></a>
+<a id="__codelineno-7-77" name="__codelineno-7-77" href="#__codelineno-7-77"></a>- **Without arguments** — load core frameworks for reference
+<a id="__codelineno-7-78" name="__codelineno-7-78" href="#__codelineno-7-78"></a>- **With a topic** — ask about `replication`, `pricing`, or another indexed topic; I find and read the relevant chapter
+<a id="__codelineno-7-79" name="__codelineno-7-79" href="#__codelineno-7-79"></a>- **With chapter** — ask for `ch05`; I load that specific chapter
+<a id="__codelineno-7-80" name="__codelineno-7-80" href="#__codelineno-7-80"></a>- **Browse** — ask "what chapters do you have?" to see the full index
+<a id="__codelineno-7-81" name="__codelineno-7-81" href="#__codelineno-7-81"></a>
+<a id="__codelineno-7-82" name="__codelineno-7-82" href="#__codelineno-7-82"></a>When you ask about a topic not covered in Core Frameworks below, I will read
+<a id="__codelineno-7-83" name="__codelineno-7-83" href="#__codelineno-7-83"></a>the relevant chapter file before answering.
+<a id="__codelineno-7-84" name="__codelineno-7-84" href="#__codelineno-7-84"></a>
+<a id="__codelineno-7-85" name="__codelineno-7-85" href="#__codelineno-7-85"></a>---
+<a id="__codelineno-7-86" name="__codelineno-7-86" href="#__codelineno-7-86"></a>
+<a id="__codelineno-7-87" name="__codelineno-7-87" href="#__codelineno-7-87"></a>## Core Frameworks &amp; Mental Models
+<a id="__codelineno-7-88" name="__codelineno-7-88" href="#__codelineno-7-88"></a>&lt;!-- ~2,000 tokens: the author's most important named frameworks and principles.
+<a id="__codelineno-7-89" name="__codelineno-7-89" href="#__codelineno-7-89"></a>     Preserve exact names. Write as "Use X when Y", "Prefer X over Y because Z".
+<a id="__codelineno-7-90" name="__codelineno-7-90" href="#__codelineno-7-90"></a>     This is a toolkit, not a summary. --&gt;
+<a id="__codelineno-7-91" name="__codelineno-7-91" href="#__codelineno-7-91"></a>
+<a id="__codelineno-7-92" name="__codelineno-7-92" href="#__codelineno-7-92"></a>&lt;generate 2,000 tokens of the most critical frameworks and insights here&gt;
+<a id="__codelineno-7-93" name="__codelineno-7-93" href="#__codelineno-7-93"></a>
+<a id="__codelineno-7-94" name="__codelineno-7-94" href="#__codelineno-7-94"></a>---
+<a id="__codelineno-7-95" name="__codelineno-7-95" href="#__codelineno-7-95"></a>
+<a id="__codelineno-7-96" name="__codelineno-7-96" href="#__codelineno-7-96"></a>## Chapter Index
+<a id="__codelineno-7-97" name="__codelineno-7-97" href="#__codelineno-7-97"></a>
+<a id="__codelineno-7-98" name="__codelineno-7-98" href="#__codelineno-7-98"></a>| # | Title | Key Frameworks |
+<a id="__codelineno-7-99" name="__codelineno-7-99" href="#__codelineno-7-99"></a>|---|-------|----------------|
+<a id="__codelineno-7-100" name="__codelineno-7-100" href="#__codelineno-7-100"></a>| [ch01](chapters/ch01-&lt;slug&gt;.md) | &lt;Title&gt; | &lt;framework1&gt;, &lt;framework2&gt; |
+<a id="__codelineno-7-101" name="__codelineno-7-101" href="#__codelineno-7-101"></a>| [ch02](chapters/ch02-&lt;slug&gt;.md) | &lt;Title&gt; | &lt;framework1&gt;, &lt;framework2&gt; |
+<a id="__codelineno-7-102" name="__codelineno-7-102" href="#__codelineno-7-102"></a>...
+<a id="__codelineno-7-103" name="__codelineno-7-103" href="#__codelineno-7-103"></a>
+<a id="__codelineno-7-104" name="__codelineno-7-104" href="#__codelineno-7-104"></a>## Topic Index
+<a id="__codelineno-7-105" name="__codelineno-7-105" href="#__codelineno-7-105"></a>
+<a id="__codelineno-7-106" name="__codelineno-7-106" href="#__codelineno-7-106"></a>&lt;!-- Alphabetical. Major terms/frameworks → chapter(s) that cover them. --&gt;
+<a id="__codelineno-7-107" name="__codelineno-7-107" href="#__codelineno-7-107"></a>- **&lt;Term&gt;** → ch&lt;N&gt;[, ch&lt;N&gt;]
+<a id="__codelineno-7-108" name="__codelineno-7-108" href="#__codelineno-7-108"></a>- **&lt;Term&gt;** → ch&lt;N&gt;
+<a id="__codelineno-7-109" name="__codelineno-7-109" href="#__codelineno-7-109"></a>
+<a id="__codelineno-7-110" name="__codelineno-7-110" href="#__codelineno-7-110"></a>## Supporting Files
+<a id="__codelineno-7-111" name="__codelineno-7-111" href="#__codelineno-7-111"></a>
+<a id="__codelineno-7-112" name="__codelineno-7-112" href="#__codelineno-7-112"></a>- [glossary.md](glossary.md) — all key terms with definitions
+<a id="__codelineno-7-113" name="__codelineno-7-113" href="#__codelineno-7-113"></a>- [patterns.md](patterns.md) — all techniques and design patterns
+<a id="__codelineno-7-114" name="__codelineno-7-114" href="#__codelineno-7-114"></a>- [cheatsheet.md](cheatsheet.md) — quick reference tables and decision guides
+<a id="__codelineno-7-115" name="__codelineno-7-115" href="#__codelineno-7-115"></a>
+<a id="__codelineno-7-116" name="__codelineno-7-116" href="#__codelineno-7-116"></a>---
+<a id="__codelineno-7-117" name="__codelineno-7-117" href="#__codelineno-7-117"></a>
+<a id="__codelineno-7-118" name="__codelineno-7-118" href="#__codelineno-7-118"></a>## Scope &amp; Limits
+<a id="__codelineno-7-119" name="__codelineno-7-119" href="#__codelineno-7-119"></a>
+<a id="__codelineno-7-120" name="__codelineno-7-120" href="#__codelineno-7-120"></a>This skill covers the book content only. For hands-on implementation in your codebase,
+<a id="__codelineno-7-121" name="__codelineno-7-121" href="#__codelineno-7-121"></a>combine with project-specific tools. For topics beyond this book, check related skills
+<a id="__codelineno-7-122" name="__codelineno-7-122" href="#__codelineno-7-122"></a>or ask the agent directly.
+<a id="__codelineno-7-123" name="__codelineno-7-123" href="#__codelineno-7-123"></a>&lt;if images_dropped &gt; 5: state that N source images were not read&gt;
+</code></pre></div></li>
+</ul>
+<p><strong>主文件模板结构说明</strong>（模板保留英文原文；各部分用途与约束）：</p>
+<table>
+<thead>
+<tr>
+<th>模板部分</th>
+<th>用途与约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>frontmatter <code>name</code> / <code>description</code></td>
+<td>技能标识与发现用描述（引书名 + 作者 + 3–6 个关键主题词）</td>
+</tr>
+<tr>
+<td><code># &lt;Full Title&gt;</code> + 元信息行</td>
+<td>作者 / 约页数 / 章数 / 生成日期（YYYY-MM-DD）</td>
+</tr>
+<tr>
+<td><code>## How to Use This Skill</code></td>
+<td>四种用法：无参数（载核心框架）/ 带主题（查索引主题，先读相关章再答）/ 带章号（如 <code>ch05</code>，载该章）/ 浏览（问"有哪些章节"）</td>
+</tr>
+<tr>
+<td><code>## Core Frameworks &amp; Mental Models</code></td>
+<td>约 2,000 token：最重要的具名框架与原则；保留精确命名；写成 "Use X when Y" / "Prefer X over Y because Z"；是工具箱不是摘要</td>
+</tr>
+<tr>
+<td><code>## Chapter Index</code></td>
+<td>章节表：链接 <code>chapters/chNN-&lt;slug&gt;.md</code> + 标题 + 关键框架</td>
+</tr>
+<tr>
+<td><code>## Topic Index</code></td>
+<td>按字母序的"术语 → 章号"映射（<code>**&lt;Term&gt;** → ch&lt;N&gt;</code>），agent 导航的关键</td>
+</tr>
+<tr>
+<td><code>## Supporting Files</code></td>
+<td>glossary.md / patterns.md / cheatsheet.md 三个链接与一句话说明</td>
+</tr>
+<tr>
+<td><code>## Scope &amp; Limits</code></td>
+<td>声明仅覆盖本书内容，实操需结合项目工具；源图丢弃数 &gt; 5 时如实声明 N 张图片未读</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="step-95-scan-the-generated-skill">Step 9.5 —— 扫描生成的技能（Scan the generated skill）<a class="headerlink" href="#step-95-scan-the-generated-skill" title="Permanent link">&para;</a></h2>
+<p>在报告成功、在另一会话加载技能、或发布之前，运行咨询性安全扫描：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">SKILL_CONVERTER_ROOT</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>dirname<span class="w"> </span><span class="s2">"</span><span class="nv">$SCRIPT_PATH</span><span class="s2">"</span><span class="k">)</span><span class="s2">/.."</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="s2">"</span><span class="nv">$PYTHON_BIN</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$SKILL_CONVERTER_ROOT</span><span class="s2">/tools/scan_generated_skill.py"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$SKILLS_HOME</span><span class="s2">/&lt;skill_name&gt;"</span>
+</code></pre></div>
+<p>扫描器以非零码退出时：停下，请人类复查其文件/行级发现。不要悄悄改写生成的文件；在发现被解决或被明确接受之前，不要加载或发布该技能。</p>
+<hr />
+<h2 id="step-10-cleanup-and-report">Step 10 —— 清理与报告（Cleanup and report）<a class="headerlink" href="#step-10-cleanup-and-report" title="Permanent link">&para;</a></h2>
+<p>若宿主是 Claude Code 且 <code>SKILLS_HOME</code> 为 <code>~/.agents/skills</code>（默认个人安装），用符号链接把技能暴露给 Claude Code——Claude Code 只扫描 <code>~/.claude/skills</code>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.claude/skills"</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nv">LINK</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.claude/skills/&lt;skill_name&gt;"</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nv">TARGET</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.agents/skills/&lt;skill_name&gt;"</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$LINK</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-L<span class="w"> </span><span class="s2">"</span><span class="nv">$LINK</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="nv">CLAUDE_STATUS</span><span class="o">=</span><span class="s2">"skipped-realdir"</span><span class="w">                 </span><span class="c1"># Step 5 migration declined; leave the old dir</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">else</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span>ln<span class="w"> </span>-sfn<span class="w"> </span><span class="s2">"</span><span class="nv">$TARGET</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINK</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">  </span><span class="c1"># Read the link back — do NOT trust that `ln` did what was asked. On Windows/MSYS</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">  </span><span class="c1"># `ln -s` may COPY instead of link (or need Developer Mode / an elevated shell), and</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">  </span><span class="c1"># PowerShell/cmd have no `ln` at all. The report must reflect what is on disk, not the</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">  </span><span class="c1"># fact that the command ran.</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-L<span class="w"> </span><span class="s2">"</span><span class="nv">$LINK</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>readlink<span class="w"> </span><span class="s2">"</span><span class="nv">$LINK</span><span class="s2">"</span><span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"</span><span class="nv">$TARGET</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">    </span><span class="nv">CLAUDE_STATUS</span><span class="o">=</span><span class="s2">"linked"</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">  </span><span class="k">elif</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"</span><span class="nv">$LINK</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">    </span><span class="nv">CLAUDE_STATUS</span><span class="o">=</span><span class="s2">"copy"</span><span class="w">                           </span><span class="c1"># a real file/dir landed instead of a link</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">  </span><span class="k">else</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">    </span><span class="nv">CLAUDE_STATUS</span><span class="o">=</span><span class="s2">"absent"</span><span class="w">                         </span><span class="c1"># ln unavailable or refused</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">  </span><span class="k">fi</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="k">fi</span>
+</code></pre></div>
+<p>真实目录守卫是必需的：向已存在的真实目录执行 <code>ln -sfn</code> 会把链接<strong>嵌进它里面</strong>（<code>~/.claude/skills/&lt;skill_name&gt;/&lt;skill_name&gt;</code>），导致 Claude Code 加载旧副本。若用户拒绝了 Step 5 的迁移，跳过符号链接并在报告中说明——在完成迁移之前，Claude Code 会继续使用旧目录。</p>
+<p><strong>报告任何与链接有关的事之前，先读回链接。</strong> 符号链接是一个"声称"，不是事实：根据 <code>CLAUDE_STATUS</code>（磁盘上的实际状态）填写 "Discoverable by" 行，绝不依据"命令已执行"这一事实。<strong>链接缺失或退化成副本时不要硬性失败</strong>——技能本体在 hub 上，其他所有宿主仍能找到它；诚实的报告是"已写入 <code>~/.agents/skills/&lt;skill_name&gt;</code>；在链接创建之前 Claude Code 看不到它"，而不是中止。（Windows 线索，未验证：目录联接（junction）——提权 <code>cmd</code> 中的 <code>mklink /J</code>，或 PowerShell 中的 <code>New-Item -ItemType Junction</code>——既不需要开发者模式也不需要符号链接特权；若你尝试它，"读回再报告"的规则不变。）</p>
+<p>用户选择宿主私有或项目级根目录时（Step 5 规则 3–4）跳过此步。</p>
+<p>然后清理提取工作目录：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">PYTHON_BIN</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">PYTHON_BIN</span><span class="k">:-</span><span class="nv">python3</span><span class="si">}</span><span class="s2">"</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$PYTHON_BIN</span><span class="s2">"</span><span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nv">PYTHON_BIN</span><span class="o">=</span><span class="s2">"python"</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">fi</span>
+</code></pre></div>
+<p>移除<strong>本次运行实际使用的工作目录</strong>——即提取输出中 <code>Workdir -&gt;</code> 所指的路径，也是 <code>metadata.json</code> 里存的 <code>workdir</code>。绝不删除不是你创建的目录：可能还有另一次提取正在旁边运行。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># WORKDIR is the path this run reported; quote it in case of spaces.</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">"</span><span class="nv">$WORKDIR</span><span class="s2">"</span>
+</code></pre></div>
+<p>若手头还有 metadata 文件，等价做法：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="s2">"</span><span class="nv">$PYTHON_BIN</span><span class="s2">"</span><span class="w"> </span>-<span class="w"> </span><span class="s2">"</span><span class="nv">$WORKDIR_METADATA_JSON</span><span class="s2">"</span><span class="w"> </span><span class="s">&lt;&lt;'PY'</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="s">import json</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="s">import shutil</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="s">import sys</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="s">from pathlib import Path</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="s">meta_path = Path(sys.argv[1])</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="s">workdir = json.loads(meta_path.read_text(encoding="utf-8")).get("workdir")</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="s">if workdir:</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="s">    shutil.rmtree(workdir, ignore_errors=True)</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="s">PY</span>
+</code></pre></div>
+<p>本文件的旧版本删除的是单个固定的 <code>book_skill_work</code> 目录。该路径已不再使用，因此那种清理现在是无害的空操作，而不会误删并发运行的输出。</p>
+<p>然后向用户报告：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>✅ Skill created: $SKILLS_HOME/&lt;skill_name&gt;/
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>📚 Book: &lt;Full Title&gt; — &lt;Author&gt;
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>📄 Pages: ~&lt;N&gt; | Chapters: &lt;N&gt;
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>Files generated:
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>  SKILL.md         — core frameworks + index   (~X tokens)
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>  chapters/        — &lt;N&gt; chapter summaries     (~X tokens each, ~X total)
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>  glossary.md      — key terms                 (~X tokens)
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>  patterns.md      — techniques &amp; patterns     (~X tokens)
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>  cheatsheet.md    — quick reference           (~X tokens)
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>  ─────────────────────────────────────────────────────
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>  Total skill size: ~X tokens (loaded on-demand, not all at once)
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>💡 Tip: check your agent's session cost/usage command to see actual token usage.
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>Usage:
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>  Ask for &lt;skill_name&gt;                  → load core frameworks
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>  Ask &lt;skill_name&gt; about &lt;topic&gt;        → find and explain a topic
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>  Ask &lt;skill_name&gt; for ch&lt;N&gt;            → dive into a specific chapter
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>Discoverable by: &lt;only what is true for the chosen destination — see below&gt;
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>Somewhere else?  mv ~/.agents/skills/&lt;skill_name&gt; &lt;dest_root&gt;/&lt;skill_name&gt; \
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>                   &amp;&amp; ln -sfn &lt;dest_root&gt;/&lt;skill_name&gt; ~/.claude/skills/&lt;skill_name&gt;
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>Prompted for permission on every file? That is your host gating writes outside the
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>working directory. Say "save it in this project" and re-run to write inside it.
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>
+<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>Reload (if your agent doesn't auto-detect new skills):
+<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>  GitHub Copilot CLI:  /skills reload
+<a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>  Claude Code:         restart the session
+<a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>  Amp:                 restart the session
+<a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>  Hermes Agent:         start a new session
+<a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>  OpenClaw:             openclaw skills list (new session if watcher disabled)
+<a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>  OpenCode:             start a new session
+<a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a>
+<a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a>Share this skill (optional):
+<a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>  GitHub repo, installable on any host (Step 11):  say "publish"
+<a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a>  Copilot ecosystem:  gh skill publish $SKILLS_HOME/&lt;skill_name&gt;
+</code></pre></div>
+<p><strong>报告模板结构说明</strong>：技能创建路径 / 书名与作者 / 约页数与章数 / 生成的文件清单及各自 token 估算（SKILL.md、chapters/、glossary.md、patterns.md、cheatsheet.md，总量按需加载而非一次全载）/ 查看实际 token 用量的提示 / 三种用法示例 / "Discoverable by" 可发现性声明 / 换宿主迁移命令 / 宿主逐文件要权限时的应对（改存项目内并重跑）/ 各宿主重载方式（Copilot CLI <code>/skills reload</code>、Claude Code 与 Amp 重启会话、Hermes 与 OpenCode 新会话、OpenClaw <code>openclaw skills list</code>）/ 可选发布渠道（Step 11 的 GitHub 发布、Copilot 生态的 <code>gh skill publish</code>）。</p>
+<p>"Discoverable by" 行必须根据 <code>CLAUDE_STATUS</code>（读回结果）填写，绝不依据"ln 执行过"这一事实——对 <code>~/.agents/skills</code> 安装：</p>
+<ul>
+<li><code>linked</code> → "Copilot CLI, Amp, Codex（原生）；Claude Code 经符号链接 ~/.claude/skills/<skill_name>"</li>
+<li><code>skipped-realdir</code> → "Copilot CLI, Amp, Codex（原生）；<strong>不含</strong> Claude Code——先迁移 ~/.claude/skills/<skill_name> 处的真实目录"</li>
+<li><code>copy</code> 或 <code>absent</code> → "Copilot CLI, Amp, Codex（原生）；<strong>不含</strong> Claude Code——宿主未能创建符号链接（普通副本会在下次更新/并入时漂移）。启用开发者模式 / 手动建链，或直接从 ~/.agents/skills 运行技能"</li>
+<li>Hermes Agent 个人根 → "Hermes Agent（来自 <code>$HERMES_HOME/skills/&lt;category&gt;</code>）"；不声称符号链接，也不声称跨 agent——其他宿主不扫描 Hermes 根</li>
+<li>其他宿主私有或项目级根 → 只列出会扫描该根的宿主；不声称符号链接</li>
+</ul>
+<p>"Somewhere else?" 迁移行必须与实际采取的路径一致，绝不能弄坏本次刚创建的符号链接。<strong><code>mv</code> 的目标始终是最终的技能目录 <code>&lt;dest_root&gt;/&lt;skill_name&gt;</code>，绝不是 <code>&lt;dest_root&gt;</code> 本身。</strong> <code>mv ~/.agents/skills/mybook ~/.copilot/skills &amp;&amp; ln -sfn ~/.copilot/skills ~/.claude/skills/mybook</code> 看起来有效、实际不对：技能落在 <code>~/.copilot/skills/mybook</code>，而链接指向上级根目录，Claude Code 会解析到一个没有 <code>SKILL.md</code> 的目录——这条规则要防的正是这种破坏。代入用户实际指定的目的地，让打印出的命令携带真实路径、无需再解释：</p>
+<ul>
+<li><code>~/.agents/skills</code> + 符号链接 → <code>mv ~/.agents/skills/&lt;skill_name&gt; &lt;dest_root&gt;/&lt;skill_name&gt; &amp;&amp; ln -sfn &lt;dest_root&gt;/&lt;skill_name&gt; ~/.claude/skills/&lt;skill_name&gt;</code></li>
+<li>宿主私有根（含 Hermes Agent）→ <code>mv &lt;src_root&gt;/&lt;skill_name&gt; &lt;dest_root&gt;/&lt;skill_name&gt;</code></li>
+<li>项目级根 → <code>mv &lt;project_root&gt;/&lt;skill_name&gt; &lt;dest_root&gt;/&lt;skill_name&gt;</code></li>
+</ul>
+<p>"Prompted for permission on every file?" 行是给"宿主对工作目录之外的写入设门禁"的场景（任何个人作用域根都在 cwd 之外）准备的：目的地已在上方声明，一行修复——重跑时要求项目级根——就放在它旁边。仅在个人作用域安装时保留；用户已选项目级时删除此行。</p>
+<hr />
+<h2 id="step-11-githubpublish">Step 11 —— 把生成的技能发布到 GitHub（Publish，可选）<a class="headerlink" href="#step-11-githubpublish" title="Permanent link">&para;</a></h2>
+<p>Step 10 报告之后、且仅当 Step 9.5 扫描通过时，提议一次：</p>
+<blockquote>
+<p>"要我把这个技能发布到 GitHub，让任何 Agent Skills 宿主都能用 <code>npx skills add</code> 安装吗？（yes / skip）"</p>
+</blockquote>
+<p>用户拒绝则到此为止。前提：<code>gh</code> CLI 已认证（用 <code>gh auth status</code> 检查）。<code>gh</code> 缺失或未认证时，提议安装配置（<code>brew install gh</code> 或 https://cli.github.com，然后 <code>gh auth login</code>）——或走无 <code>gh</code> 路径：用户在 GitHub 网页 UI 创建所选可见性的空仓库，然后你执行下面的 <code>git init</code>/<code>add</code>/<code>commit</code> 命令，再 <code>git remote add origin &lt;repo-url&gt; &amp;&amp; git push -u origin main</code>。下述可见性规则对网页创建的仓库同样适用。</p>
+<p><strong>可见性是一个独立的封闭问题——绝不推断，绝不从早前的回答里读出。</strong> 用户接受后，单独提出这个问题，并要求一个词的回答：</p>
+<blockquote>
+<p>"私有还是公开仓库？请用一个词回答：<code>private</code> 或 <code>public</code>。"</p>
+</blockquote>
+<p><strong>回答必须<em>就是</em> <code>public</code>，而不只是<em>包含</em>它——这是硬规则，不是建议。</strong> 除一种情况外，一律带 <code>--private</code> 运行 <code>gh repo create</code>：唯一例外是对可见性问题的回答恰好是光秃秃的单词 <code>public</code>。禁止子串匹配，因为一句关于<strong>源材料许可</strong>的话不是可见性回答——"it's public domain"、"the book is public domain"、"it's publicly available" 描述的都是材料而非仓库，全部落到 <code>--private</code>。转述、成句的回答、含糊其辞、沉默、或你自己的推断都<strong>不是</strong>同意：再问一次；回答仍不是光秃秃的单词时，用 <code>--private</code> 并在报告中说明。私有仓库以后可以转公开；书籍衍生内容的公开推送无法撤回发布。</p>
+<p><strong>版权门（Copyright gate）——创建仓库前一律适用：</strong> 章节文件是综合摘要而非原文，但仍衍生自源材料。按 README 的版权与合理使用政策：从<strong>第三方版权书籍</strong>生成的技能必须保持<strong>私有</strong>；只有当源是用户本人作品、开放许可内容、或用户明确确认有权公开再分发的材料时，才提供公开选项——并说明适用的是哪种情形。能访问公司内部材料不等于有权披露：来自内部文档的技能保持<strong>私有</strong>，除非用户声明拥有发布权。</p>
+<p>用户接受后：</p>
+<ol>
+<li>在 <code>$SKILLS_HOME/&lt;skill_name&gt;/</code> 内添加仓库 <code>README.md</code>（绝不覆盖既有文件）——技能标题、一段描述（"Agent skill generated from <em><Title></em> by <Author> with <a href="https://github.com/virgiliojr94/book-to-skill">book-to-skill</a>"）、下述第 3 步的安装命令、文件清单，以及"内容为综合摘要、并非书原文"的说明。</li>
+<li>把技能文件夹初始化为 git 仓库并创建远端（默认仓库名 <code>&lt;skill_name&gt;</code>；允许用户改——有人偏好 <code>&lt;skill_name&gt;-skill</code> 后缀）。<strong>嵌套仓库守卫（Nested-repo guard）：</strong> 先检查技能文件夹是否已位于某个 git 仓库之内（<code>git -C "$SKILLS_HOME/&lt;skill_name&gt;" rev-parse --show-toplevel</code>——项目级根如 <code>.claude/skills/</code> 下必然如此）。若在，<strong>不要</strong>原地 <code>git init</code>：外层仓库会把该文件夹记录为嵌入仓库（gitlink，mode 160000）而没有 <code>.gitmodules</code>，外层项目的全新克隆会静默丢失该技能。改为把技能文件夹复制到一个临时目录，在副本中执行下列命令，并告知用户：远端的工作副本是发布出去的仓库，而不是项目本地文件夹。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="nv">$SKILLS_HOME</span><span class="s2">/&lt;skill_name&gt;"</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>git<span class="w"> </span>init<span class="w"> </span>-b<span class="w"> </span>main
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>git<span class="w"> </span>add<span class="w"> </span>-A
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Add &lt;skill_name&gt; skill"</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>gh<span class="w"> </span>repo<span class="w"> </span>create<span class="w"> </span>&lt;repo_name&gt;<span class="w"> </span>--private<span class="w"> </span>--source<span class="w"> </span>.<span class="w"> </span>--push
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="c1"># --private is the default; substitute --public ONLY under the visibility rule above</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="c1"># (the visibility answer WAS the bare word "public" AND the copyright gate allows it)</span>
+</code></pre></div>
+<ol>
+<li>报告仓库 URL 与跨宿主安装命令：</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>✅ Published: https://github.com/&lt;owner&gt;/&lt;repo_name&gt; (&lt;private|public&gt;)
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>Install on any Agent Skills host:
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>  npx skills add https://github.com/&lt;owner&gt;/&lt;repo_name&gt; --skill &lt;skill_name&gt;
+</code></pre></div>
+<p>触发嵌套仓库守卫、从副本发布时，加一行——该本地文件夹永远不会获得远端，因此"更新/并入时推送"的提议也不会出现在它身上：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>⚠️  Published from a copy: &lt;skill folder&gt; sits inside another git repository, so it has
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    no remote of its own. To publish a later update, re-run Step 11, or clone
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    https://github.com/&lt;owner&gt;/&lt;repo_name&gt; and fold new material into the clone.
+</code></pre></div>
+<p>根级 <code>SKILL.md</code> 布局正是 <code>skills</code> CLI 识别的结构，仓库可直接安装——无需调整结构。嵌套仓库情形之外，本地文件夹仍是本机的活动安装、也是远端的工作副本，后续的更新/并入可以把变更提交并推送到同一远端。</p>
+<hr />
+<h2 id="update-fold-in-workflow">更新/并入工作流（Update / Fold-in Workflow）<a class="headerlink" href="#update-fold-in-workflow" title="Permanent link">&para;</a></h2>
+<p>对 <code>$SKILLS_HOME/&lt;skill_name&gt;/</code> 的既有技能执行更新/并入时：</p>
+<h3 id="1-read-existing-skill-structure">1. 读取既有技能结构（Read Existing Skill Structure）<a class="headerlink" href="#1-read-existing-skill-structure" title="Permanent link">&para;</a></h3>
+<p>读取并解析既有技能的文件：</p>
+<ul>
+<li>读 <code>$SKILLS_HOME/&lt;skill_name&gt;/SKILL.md</code>，解析既有<strong>章节索引（Chapter Index）</strong>、<strong>主题索引（Topic Index）</strong>、元数据（作者、总章数）与<strong>核心框架（Core Frameworks）</strong>。</li>
+<li>列出 <code>$SKILLS_HOME/&lt;skill_name&gt;/chapters/</code> 的全部文件，找出最高章号（如 <code>ch12</code>）。</li>
+<li>读 <code>$SKILLS_HOME/&lt;skill_name&gt;/glossary.md</code>、<code>$SKILLS_HOME/&lt;skill_name&gt;/patterns.md</code>、<code>$SKILLS_HOME/&lt;skill_name&gt;/cheatsheet.md</code>，了解已索引了哪些术语与框架。</li>
+</ul>
+<h3 id="2-match-content-identify-revisions-vs-additions">2. 匹配内容，区分"修订"与"新增"（Match Content &amp; Identify Revisions vs. Additions）<a class="headerlink" href="#2-match-content-identify-revisions-vs-additions" title="Permanent link">&para;</a></h3>
+<p>分析本次运行 <code>full_text.txt</code>（提取输出中 <code>Text -&gt;</code> 的路径）中的新提取文本，判断新内容属于：</p>
+<ul>
+<li><strong>对既有章节的更新/修订</strong>：若新内容的某节直接更新或扩展既有章节的主题，读该章文件，把新细节合并进去，并重写该文件。</li>
+<li><strong>新增内容</strong>：若内容引入新的章节、论文或独立小节，在 <code>chapters/</code> 下创建<strong>新的章节摘要文件</strong>。编号从既有最高章号之后开始（如既有章节止于 <code>ch12</code>，则创建 <code>ch13-*.md</code>、<code>ch14-*.md</code> 等）。</li>
+</ul>
+<h3 id="3-generate-or-update-chapter-summary-files">3. 生成或更新章节摘要文件（Generate or Update Chapter Summary Files）<a class="headerlink" href="#3-generate-or-update-chapter-summary-files" title="Permanent link">&para;</a></h3>
+<p>对每个新增或修订的章节：</p>
+<ul>
+<li>读取新提取文本的对应部分。</li>
+<li>按 <strong>Step 7</strong> 的格式指南构建摘要。</li>
+<li>写入/更新 <code>$SKILLS_HOME/&lt;skill_name&gt;/chapters/</code> 下的文件。</li>
+</ul>
+<h3 id="4-merge-supporting-files">4. 合并支撑文件（Merge Supporting Files）<a class="headerlink" href="#4-merge-supporting-files" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>合并 glossary.md</strong>：</li>
+<li>读既有 <code>$SKILLS_HOME/&lt;skill_name&gt;/glossary.md</code>。</li>
+<li>从新内容提取全部新术语与定义（Step 8 词汇表指南）。</li>
+<li>合并既有与新术语，按字母序排列。</li>
+<li>术语已存在时，把新的章节/来源引用追加到该条目（如 <code>**Term** — definition (Ch 4, Ch 13)</code>）。</li>
+<li>用合并后的完整字母序列表重写 <code>$SKILLS_HOME/&lt;skill_name&gt;/glossary.md</code>。</li>
+<li><strong>合并 patterns.md</strong>：</li>
+<li>读既有 <code>$SKILLS_HOME/&lt;skill_name&gt;/patterns.md</code>。</li>
+<li>从新内容提取新技巧、算法或模式。</li>
+<li>追加新模式，保持格式一致，总长度保持精炼（2,500 token 以内）。</li>
+<li><strong>合并 cheatsheet.md</strong>：</li>
+<li>读既有 <code>$SKILLS_HOME/&lt;skill_name&gt;/cheatsheet.md</code>。</li>
+<li>提取新的比较规则、决策表或参数指南。</li>
+<li>干净地并入速查表结构。</li>
+</ul>
+<h3 id="5-skillmdre-generate-the-master-skillmd">5. 重新生成主 SKILL.md（Re-generate the Master SKILL.md）<a class="headerlink" href="#5-skillmdre-generate-the-master-skillmd" title="Permanent link">&para;</a></h3>
+<p>更新主技能文件 <code>$SKILLS_HOME/&lt;skill_name&gt;/SKILL.md</code>：</p>
+<ul>
+<li><strong>元数据</strong>：章数递增，更新估算页数，酌情加入新源名称。<code>Generated</code> 日期更新为当前日期。</li>
+<li><strong>核心框架</strong>：把新内容中影响最大的思维模型或原则并入（确保整个文件仍低于 4,000 token）。</li>
+<li><strong>章节索引</strong>：把新章节追加进索引表，链接到新建文件。</li>
+<li><strong>主题索引</strong>：新主题按字母序合并。既有主题在新章节中也有覆盖时，在该行追加新章链接（如 <code>- **Topic** → ch05, ch13</code>）。</li>
+</ul>
+<h3 id="6-scan-cleanup-and-report">6. 扫描、清理与报告（Scan, Cleanup, and Report）<a class="headerlink" href="#6-scan-cleanup-and-report" title="Permanent link">&para;</a></h3>
+<p>文件全部写好并合并后，运行 <strong>Step 9.5</strong>，然后进入 <strong>Step 10</strong> 完成清理，并打印一份定制的更新报告——汇总新增章节、合并的词汇表条目与更新后的索引。若技能文件夹是带远端的 git 仓库（经 <strong>Step 11</strong> 发布），提议提交并推送本次更新。</p>
+<hr />
+<h2 id="quality-rules">质量规则（Quality Rules）<a class="headerlink" href="#quality-rules" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>提取结构，而非摘要</strong>——捕获具名框架、精确表述、反模式；不是章节复述</li>
+<li><strong>保留作者的精确表述</strong>——"The 5 Whys" ≠ "多问几次为什么"；保留精确命名</li>
+<li><strong>密度胜过完备</strong>——1,000 token 的摘要胜过 10,000 token 的原文节选</li>
+<li><strong>从业者语气</strong>——写 "Use X when Y"，不要写 "The book explains X（本书解释了 X）"</li>
+<li><strong>SKILL.md 前置加载</strong>——压缩保留前 5,000 token；最重要的内容放最前</li>
+<li><strong>章节文件按需加载</strong>——在被读取之前不占用技能预算</li>
+<li><strong>绝不照抄书籍原文</strong>——永远综合、摘要、提取信号</li>
+<li><strong>主题索引至关重要</strong>——它是 agent 导航到正确章节文件的方式</li>
+</ol>
+<hr />
+<h2 id="_1">译注汇总<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>位置</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>①</td>
+<td>文件头</td>
+<td><code>description</code> 为功能性元数据，实际技能包建议保留英文原文以获得最佳跨宿主匹配</td>
+</tr>
+<tr>
+<td>②</td>
+<td>技能位置</td>
+<td>列表沿用上游原始编号：11、12 各出现两次（OpenClaw 与 OpenCode），实际 14 项，疑为上游编号笔误</td>
+</tr>
+<tr>
+<td>③</td>
+<td>Step 5 宿主表</td>
+<td>OpenCode 行在原文中脱离表格、位于段落之后（L405），译本并回表格，内容未改</td>
+</tr>
+<tr>
+<td>④</td>
+<td>Step 5</td>
+<td>Hermes Agent 说明段在原文 L402 与 L407 逐字重复，译本合并为一处</td>
+</tr>
+<tr>
+<td>⑤</td>
+<td>全文</td>
+<td>所有代码块（bash 与 markdown 生成模板）由脚本按行号从上游 <code>a24e62f</code> 的 SKILL.md 逐字节拼入（共 15 块），未作任何改写；块后所附"结构说明"为译本新增的理解辅助，不是规格的一部分；运行时提示语（blockquote 中的话术）译为中文仅供参考，实际语言由宿主与用户决定</td>
+</tr>
+<tr>
+<td>⑥</td>
+<td>全文</td>
+<td>行号引用（如 L405）对应上游 <code>a24e62f</code> 的根目录 SKILL.md；上游更新后本译本需重新校对</td>
+</tr>
+<tr>
+<td>⑦</td>
+<td>译本维护</td>
+<td>2026-10-24 起本仓库分叉的根目录 SKILL.md 在文件头注释块内新增 2 行中文版互链（指向本译本），位于原 L21 <code>--&gt;</code> 之前：引文中 L21 及以后的行号换算到分叉文件需 +2，L20 及以前不变；行号引用仍以上游 <code>a24e62f</code> 为锚，不受影响</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.instant", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>
