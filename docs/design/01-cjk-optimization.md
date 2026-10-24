@@ -1,8 +1,8 @@
 # RFC 01 —— 中文书籍优化（P1 方向）
 
-> 状态：**草案（待评审）** ｜ 提出日期：2026-10-24 ｜ 优先级：P1
-> 关联：[ROADMAP.md](../ROADMAP.md) 阶段二 · [DEVELOPMENT.md](../DEVELOPMENT.md) 方向 1 · [阶段一实测记录](../testing/2026-10-24-phase1-gap-closure.md)
-> 评审通过后冻结为 v0.1 范围，进入阶段三开发。
+> 状态：**修订稿 v0.1（技术评审通过，待所有者确认冻结）** ｜ 提出日期：2026-10-24 ｜ 优先级：P1
+> 关联：[ROADMAP.md](../ROADMAP.md) 阶段二 · [DEVELOPMENT.md](../DEVELOPMENT.md) 方向 1 · [阶段一实测记录](../testing/2026-10-24-phase1-gap-closure.md) · [评审记录](01-cjk-optimization-review.md)（基于 deep-dive §7，修订 R1–R7 已落实）
+> 所有者确认冻结后进入阶段三开发。
 
 ---
 
@@ -42,10 +42,14 @@
 ### 3.1 子项目 A：扫描版中文 OCR（rapidocr-onnxruntime）
 
 - **引擎选型**：`rapidocr-onnxruntime`（PP-OCRv4 ONNX 版）。理由：纯 pip 安装（运行时 + 模型共约 25MB，对比 paddlepaddle 500MB+ / tesseract 系统包）、中文识别为第一目标、CPU 即可、失败可干净回退。
-- **集成模式**：新文件 `book_to_skill/ocr_integration.py`，仿 `pdf_inspector_integration.py` 的 hook 结构：
-  - `install_ocr_hook()` 包装 `extract_single_file`：当 `looks_image_only()` 为真时，先尝试 rapidocr 逐页 OCR，成功则组装文本返回（`extraction_method="rapidocr"`）；失败（未安装/识别为空/异常）则**落回原错误路径**（错误信息不变）。
+- **集成模式**：新文件 `book_to_skill/ocr_integration.py`，仿 `pdf_inspector_integration.py` 的 hook 结构（评审修订 R1/R2/R4/R7 已并入）：
+  - `install_ocr_hook()` 包装 `extract_single_file`：**wrap 层直接调用** `looks_image_only()`（与内层预检同一模块级实现，单点复用防漂移）——为真 → 尝试 rapidocr 逐页 OCR，成功则组装文本返回（`extraction_method="rapidocr"`）；为假 → 原样委托被包裹函数（文本 PDF 零额外开销，不先跑一次注定失败的探测）；失败（未安装/识别为空/异常）→ **委托被包裹函数落回原错误路径**（错误信息含 `ocrmypdf` 建议原样保留）。回退目标是「安装时刻已包裹的函数」，不感知、不绕过其他 hook（组合正确性）。
+  - **technical 模式规格**：上游 `looks_image_only` 预检位于 PDF 分支顶端、模式分叉之前，且 `extract_with_docling` 硬编码 `do_ocr=False`（parsers/pdf.py L156）——扫描件两条模式原本都不可用。hook 对两条模式同样生效；technical 模式命中 OCR 分支时返回 OCR 文本（优于报错），metadata 显式记 `technical_analysis_unavailable: true`，不把 text 质量伪装成 technical 质量。
+  - **内存约束（逐页流式）**：单页转图 → 识别 → 拼行 → 释放图像缓冲，禁止批量载入整本页面图像（大书峰值内存已有 ×2 事实，见 deep-dive §2.4，本子项目不额外放大）。
   - `enrich_ocr_metadata()` 把 OCR 页数、置信度均值等溯源信息原子写入 metadata.json（复用 pdf_inspector 的 tmp + replace 原子写法）。
   - 幂等保护：hook 函数挂 `_book_to_skill_ocr_hook` 属性防重复包装。
+  - **挂载顺序**：cli.main 中 `install_ocr_hook()` 置于 `install_pdf_inspector_hook()` **之后**——monkey-patch 后装者包裹在外层，扫描件先被 OCR 分支拦截，不消耗 pdf-inspector 探测；文本 PDF 走内层 inspector 快路径不受影响。
+  - **路线互斥说明**：开 docling 自带 OCR（`do_ocr=True`）与「hook 前置 OCR」二选一，v0.1 选后者（deep-dive §6：前者改动更小但重，且失去「每页原因」可观测性）。
 - **依赖声明**：`dependencies.py` 新增 `DEPENDENCY_GROUPS["ocr-cjk"]`（`required=False`，`--check` 自动展示）；`config.py` `PYTHON_DEPENDENCIES` 加 `rapidocr_onnxruntime` 映射。安装模式沿用 `--install-missing ask|yes|no` 现有机制。
 - **换行策略**：OCR 逐行输出后按"行尾无句末标点且下一行行首非缩进"启发式合并段落——与 PDF 版面重建解耦，保守合并，宁可不并不可错并。
 
@@ -55,6 +59,7 @@
 - **触发条件（双阈值，缺一不可，防误伤散文）**：单行长度 > 120 字符 **且** 代码特征密度 ≥ 3 个/行（特征词表：`def |import |return |= |;|(){}[]|_`、常见关键字、行内 `>=2` 个运算符）。仅处理 docling 输出（text 模式的 pdftotext 已保留换行，不经过此函数）。
 - **重建规则**：按特征词表边界做保守断行（`def`/`return`/赋值号前优先），**不做**通用语句解析；转义噪声 `\_` → `_`（仅在触发段内）。
 - **诚实降级**：未达触发条件的代码段落维持原样，metadata 记 `code_rebuild_skipped` 计数，让下游可见质量边界。
+- **时序约束（钉死，评审修订 R3）**：重建必须发生在 docling 成功分支与 `sanitize_extracted_text` **之间**——现有位置（`extract_with_docling()` 返回前）天然满足；若搬到 utils 侧（sanitize 之后），特征密度统计面对的是被清洗改形后的文本，探针字符已被剥（deep-dive §7）。该约束写入 `rebuild_code_linebreaks` docstring。
 
 ### 3.3 子项目 C：token 估算校准（常数修正 + 可选精确模式）
 
@@ -69,7 +74,7 @@
   2. `cjk-book-technical.md` —— 含中文表格标题、代码块、全角标点；
   3. `cjk-scan-mock.pdf` 的替代 —— OCR 不放二进制 fixture，用 mock 单测（见 §5）。
 - **断言锁定**：章节计数与方法（numeric/structural）、`has_toc`、token 估算区间、标题样本列表——全部进 `tests/test_cjk_regression.py`。
-- **ToC 点线增强**：`utils.py` `_TOC_PATTERN` 旁新增 `_TOC_DOTTED_LINE = re.compile(r"^\s*.+\s*\.{3,}\s*[0-9０-９]+\s*$")`；`detect_structure()` 的 `has_toc` 判定改为"标题行命中 **或** 前 30k 字符内点线条目 ≥ 3"。中英文同等受益，改动面一个函数。
+- **ToC 点线增强**：`utils.py` `_TOC_PATTERN` 旁新增 `_TOC_DOTTED_LINE = re.compile(r"^\s*.+\s*(?:(?:\.{3}|\u2026{2})[.\u2026]*)\s*[0-9０-９]+\s*$")`；`detect_structure()` 的 `has_toc` 判定改为"标题行命中 **或** 前 30k 字符内点线条目 ≥ 3"。leader 设计（评审修订 R6，已经正则执行验证）：中文目录页实际用**省略号 `…`（U+2026）**而非 ASCII 点，且惯用的 `……` 只是 2 个字符——纯 `\.{3,}` 或简单 `[.\u2026]{3,}` 都匹配不上；故 leader 定义为「≥3 个 ASCII 点 **或** ≥2 个 `…`，后接点类字符任意混排」，单 `…`、两个 ASCII 点不匹配（保守性不降，反例已测：散文行 / `Version 2..15` / `A .. 12` 均拒绝）。判定表达式落在 utils.py L986 `has_toc` 单行处，天然继承多源 OR 合并与无 banner 重跑语义；中英文同等受益，改动面一个函数。
 
 ## 4. 改动点清单（文件级）
 
@@ -80,7 +85,7 @@
 | `book_to_skill/config.py` | `PYTHON_DEPENDENCIES` 加 rapidocr 映射；`CJK_CHARS_PER_TOKEN` 1.5→1.2；新增 `TOKEN_ESTIMATORS` 常量 | A/C |
 | `book_to_skill/utils.py` | `main()` 参数加 `--token-estimator`；`estimate_tokens()` 加 tiktoken 分支（默认不变）；`detect_structure()` 的 `has_toc` 加点线判定；metadata 增加 `token_estimator`/`ocr_*`/`code_lines_rebuilt` 字段 | A/C/D |
 | `book_to_skill/parsers/pdf.py` | 新增 `rebuild_code_linebreaks()`；`extract_with_docling()` 尾部调用 | B |
-| `book_to_skill/cli.py` | 无需改动（hook 由 `ocr_integration.install_ocr_hook()` 在 cli.main 挂载，仿 pdf_inspector 的 L28/L30） | A |
+| `book_to_skill/cli.py` | 新增一行 `install_ocr_hook()` 挂载（置于 `install_pdf_inspector_hook()` 之后，后装者外层先拦截扫描件，评审修订 R7） | A |
 | `tests/test_cjk_regression.py` | **新增**：中文回归断言集 | D |
 | `tests/fixtures/cjk/*` | **新增**：2 个确定性中文样例 | D |
 | `tests/test_ocr_integration.py`、`tests/test_docling_code_rebuild.py`、`tests/test_token_estimator.py` | **新增**：mock 单测（不依赖真实模型/网络） | A/B/C |
@@ -90,7 +95,7 @@
 ## 5. 测试计划
 
 1. **mock 单测（CI 稳定，无网络/模型依赖）**：
-   - OCR：mock rapidocr 引擎返回预置行序列 → 断言 hook 触发条件（`looks_image_only` 为真才进 OCR）、失败回退路径（引擎缺失/识别为空/抛异常三种）、metadata 字段；
+   - OCR：mock rapidocr 引擎返回预置行序列 → 断言 hook 触发条件（`looks_image_only` 为真才进 OCR）、失败回退路径（引擎缺失/识别为空/抛异常三种）、metadata 字段；挂载顺序组合测试（OCR 外层 / inspector 内层：扫描件不消耗 inspector 探测；文本 PDF 两 hook 均零行为变化）；technical 模式 OCR 分支的 `technical_analysis_unavailable` 字段断言；
    - 代码重建：正例（长代码行恢复 N 行）、反例（长散文行不触发）、转义修复；
    - token：heuristic 数值锁定（改常数后的黄金值）、tiktoken mock 路径、estimator 字段落盘。
 2. **fixture 回归**：`cjk/` 两样例过完整 `detect_structure()` 断言集。
@@ -108,11 +113,13 @@
 | tiktoken 精确模式引入非确定性 | 低 | 默认关闭；metadata 记录 estimator 与版本；上游"同书同数"哲学由 heuristic 路线保底 |
 | 与上游 rebase 冲突 | 低 | 全部为新增文件或新增分支，`elif` 链与 `estimate_tokens` 内部改动极小；改前跑 `git fetch upstream` 确认基线（协作规则 #6） |
 | 磁盘/安装负担（本环境已发生一次） | 低 | rapidocr ~25MB，无 torch 依赖；`--check` 明示可选 |
+| OCR 页面图像内存峰值（大书） | 低 | 逐页流式即用即弃（§3.1 硬性要求），禁止批量载图；真实样本冒烟时记录实测峰值（评审修订 R4） |
+| `reuse_is_safe` 不含提取器版本指纹（deep-dive §7 盲区登记） | 低 | v0.1 不引入 OCR 中间缓存，OCR 文本走标准 full_text 复用语义，盲区不扩大；未来若加缓存，指纹须含 OCR 引擎名 + 模型版本（v0.2 考虑项，评审修订 R5） |
 
 ## 7. v0.1 范围冻结
 
 **包含**：§3.1 OCR hook（rapidocr）· §3.2 代码换行重建 · §3.3 常数校准 1.2 + 可选 tiktoken · §3.4 中文 fixture + ToC 点线。
-**不含**（显式延期）：`SKILL.md` 行为修改（→P4）· Web/API（→P3）· EPUB 中文增强 · 繁体/竖排专项 · PaddleOCR 引擎。
+**不含**（显式延期）：`SKILL.md` 行为修改（→P4）· Web/API（→P3）· EPUB 中文增强 · 繁体/竖排专项 · PaddleOCR 引擎 · docling 自带 OCR 路线（`do_ocr=True`，与 hook 路线互斥，见 §3.1）· OCR 中间结果缓存（`reuse_is_safe` 指纹盲区划界，见评审记录 R5）。
 
 **里程碑**：D1 mock 单测与 fixture → D2 OCR hook 合入 → D3 代码重建 → D4 token 校准 → D5 全量门禁 + 冒烟 → 标记 v0.1 完成。
 
@@ -121,3 +128,4 @@
 | 日期 | 变更 |
 |---|---|
 | 2026-10-24 | 初版草案，待评审 |
+| 2026-10-24 | 基于 deep-dive §7 技术评审通过（有条件），7 项修订落实：R1 hook 判定上移至 wrap 层 · R2 technical 模式行为显式化 · R3 重建时序钉死（sanitize 之前）· R4 OCR 逐页流式与内存登记 · R5 v0.1 无 OCR 缓存与指纹盲区划界 · R6 ToC 点线正则修复（支持 `…` 省略号）· R7 cli.py 挂载行更正与挂载顺序规格 → 修订稿 v0.1，待所有者确认冻结 |
